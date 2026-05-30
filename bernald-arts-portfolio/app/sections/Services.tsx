@@ -1,64 +1,257 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const services = [
   {
-    id: 1,
+    id: "01",
     title: "Wall Art",
     description:
-      "Customized wall art and mural works for homes, resorts, offices, schools, and commercial spaces.",
+      "Customized wall art and mural works for homes and commercial spaces.",
     image: "/images/services/wall-art.jpg",
+    border: "border-red-400/20",
+    glow: "shadow-[0_0_80px_rgba(255,80,80,0.22)]",
   },
 
   {
-    id: 2,
+    id: "02",
     title: "Pencil Art",
     description:
-      "Detailed pencil portraits including family photos, anime art, pets, and personalized artworks.",
+      "Detailed pencil portraits with realistic cinematic detailing.",
     image: "/images/services/pencil-art.jpg",
+    border: "border-blue-400/20",
+    glow: "shadow-[0_0_80px_rgba(80,140,255,0.22)]",
   },
 
   {
-    id: 3,
+    id: "03",
     title: "Colour Pencil",
     description:
-      "Realistic and vibrant colour pencil artworks with premium detailing.",
+      "Premium colour pencil artworks with rich textures.",
     image: "/images/services/colour-pencil.jpg",
+    border: "border-orange-300/20",
+    glow: "shadow-[0_0_80px_rgba(255,170,70,0.22)]",
   },
 
   {
-    id: 4,
+    id: "04",
     title: "Acrylic",
     description:
-      "Premium acrylic paintings crafted with cinematic textures and storytelling.",
+      "Emotion-driven acrylic paintings with storytelling visuals.",
     image: "/images/services/acrylic.jpg",
+    border: "border-violet-400/20",
+    glow: "shadow-[0_0_80px_rgba(170,120,255,0.22)]",
   },
 
   {
-    id: 5,
+    id: "05",
     title: "Oil Painting",
     description:
-      "Classic oil paintings with rich textures and gallery-style finishing.",
+      "Classic oil paintings with gallery-style finish.",
     image: "/images/services/oil.jpg",
-  },
-
-  {
-    id: 6,
-    title: "Water Colour",
-    description:
-      "Elegant watercolor artworks with handcrafted atmosphere.",
-    image: "/images/services/watercolor.jpg",
-  },
-
-  {
-    id: 7,
-    title: "Blood Art",
-    description:
-      "Unique personalized blood artworks with cinematic expression.",
-    image: "/images/services/blood-art.jpg",
+    border: "border-yellow-300/20",
+    glow: "shadow-[0_0_90px_rgba(255,220,100,0.22)]",
   },
 ];
+
+function Card({
+  service,
+  index,
+}: {
+  service: (typeof services)[0];
+  index: number;
+}) {
+  const ref = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start center"],
+  });
+
+  const direction = index % 2 === 0 ? -250 : 250;
+
+  // ENTRY ANIMATION ONLY
+  const x = useTransform(scrollYProgress, [0, 1], [direction, 0]);
+
+  const rotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [index % 2 === 0 ? -6 : 6, 0]
+  );
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
+
+  return (
+    <div
+      ref={ref}
+      className="
+        relative
+
+        h-[100vh]
+      "
+    >
+      {/* STICKY WRAPPER */}
+      <div
+        className="
+          sticky
+          top-[90px]
+
+          flex
+          justify-center
+        "
+      >
+        <motion.div
+          style={{
+            x,
+            rotate,
+            opacity,
+            scale: 1 - index * 0.04,
+          }}
+          className={`
+            relative
+
+            w-full
+
+            h-[380px]
+            sm:h-[460px]
+            md:h-[620px]
+
+            overflow-hidden
+
+            rounded-[30px]
+            md:rounded-[42px]
+
+            border
+
+            bg-white/[0.05]
+
+            backdrop-blur-2xl
+
+            ${service.border}
+            ${service.glow}
+          `}
+        >
+          {/* IMAGE */}
+          <motion.img
+            src={service.image}
+            alt={service.title}
+            style={{
+              scale: imageScale,
+            }}
+            className="
+              absolute
+              inset-0
+
+              w-full
+              h-full
+
+              object-cover
+
+              brightness-[0.72]
+            "
+          />
+
+          {/* OVERLAY */}
+          <div
+            className="
+              absolute
+              inset-0
+
+              bg-gradient-to-t
+              from-black
+              via-black/25
+              to-black/5
+            "
+          />
+
+          {/* PREMIUM LIGHT */}
+          <div
+            className="
+              absolute
+              inset-0
+
+              bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_60%)]
+
+              pointer-events-none
+            "
+          />
+
+          {/* CONTENT */}
+          <div
+            className="
+              absolute
+              inset-0
+
+              flex
+              flex-col
+              justify-end
+
+              p-6
+              md:p-12
+            "
+          >
+            <p
+              className="
+                text-white/40
+
+                text-[10px]
+                md:text-[11px]
+
+                uppercase
+
+                tracking-[0.45em]
+
+                mb-4
+              "
+            >
+              {service.id}
+            </p>
+
+            <h2
+              className="
+                text-white
+
+                text-[11vw]
+                sm:text-[8vw]
+                md:text-[4vw]
+
+                leading-[0.82]
+
+                font-black
+
+                tracking-[-0.08em]
+
+                uppercase
+
+                mb-5
+              "
+            >
+              {service.title}
+            </h2>
+
+            <p
+              className="
+                max-w-xl
+
+                text-white/65
+
+                text-[13px]
+                md:text-[16px]
+
+                leading-relaxed
+              "
+            >
+              {service.description}
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 export default function Services() {
   return (
@@ -66,69 +259,46 @@ export default function Services() {
       id="services"
       className="
         relative
+
         overflow-hidden
+
         bg-black
+
+        px-4
+        md:px-8
+
         py-24
+        md:py-32
       "
     >
-      {/* NOISE */}
-      <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.05]
-          mix-blend-soft-light
-          pointer-events-none
-        "
-        style={{
-          backgroundImage: "url('/noise.png')",
-        }}
-      />
-
       {/* HEADER */}
-      <div
-        className="
-          relative
-          z-20
-          mb-16
-          px-6
-          md:px-12
-        "
-      >
-        <div
+      <div className="mb-24 md:mb-32">
+        <p
           className="
-            flex
-            items-center
-            gap-5
-            mb-7
+            text-white/35
+
+            uppercase
+
+            tracking-[0.45em]
+
+            text-[10px]
+            md:text-[11px]
+
+            mb-6
           "
         >
-          <div className="w-14 h-px bg-white/20" />
+          Creative Services
+        </p>
 
-          <p
-            className="
-              text-[10px]
-              md:text-[11px]
-
-              uppercase
-
-              tracking-[0.38em]
-
-              text-white/40
-            "
-          >
-            CREATIVE SERVICES
-          </p>
-        </div>
-
-        <h2
+        <h1
           className="
             text-white
 
             text-[15vw]
+            sm:text-[12vw]
             md:text-[7vw]
 
-            leading-[0.82]
+            leading-[0.78]
 
             font-black
 
@@ -140,248 +310,19 @@ export default function Services() {
           Artistic
           <br />
           Expertise
-        </h2>
+        </h1>
       </div>
 
-      {/* CAROUSEL */}
-      <div
-        className="
-          relative
-          overflow-hidden
-        "
-      >
-        <motion.div
-          animate={{
-            x: ["0%", "-50%"],
-          }}
-          transition={{
-            duration: 40,
-            ease: "linear",
-            repeat: Infinity,
-          }}
-          className="
-            flex
-            gap-5
-            w-max
-            px-6
-            md:px-12
-          "
-        >
-          {[...services, ...services].map((service, index) => (
-            <motion.div
-              key={index}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-              }}
-              transition={{
-                duration: 0.4,
-              }}
-              className="
-                relative
-
-                min-w-[260px]
-                md:min-w-[420px]
-
-                h-[420px]
-                md:h-[580px]
-
-                overflow-hidden
-
-                rounded-[24px]
-
-                bg-white/[0.03]
-
-                border
-                border-white/10
-
-                backdrop-blur-xl
-
-                group
-              "
-            >
-              {/* IMAGE */}
-              <img
-                src={service.image}
-                alt={service.title}
-                className="
-                  absolute
-                  inset-0
-
-                  w-full
-                  h-full
-
-                  object-cover
-
-                  brightness-[0.72]
-                  grayscale-[12%]
-
-                  transition-all
-                  duration-[1600ms]
-
-                  group-hover:scale-105
-                "
-              />
-
-              {/* OVERLAY */}
-              <div
-                className="
-                  absolute
-                  inset-0
-
-                  bg-gradient-to-t
-                  from-black
-                  via-black/20
-                  to-transparent
-                "
-              />
-
-              {/* CONTENT */}
-              <div
-                className="
-                  absolute
-                  inset-0
-
-                  flex
-                  flex-col
-                  justify-end
-
-                  p-6
-                  md:p-10
-                "
-              >
-                {/* NUMBER */}
-                <p
-                  className="
-                    text-white/30
-
-                    text-[10px]
-
-                    tracking-[0.4em]
-
-                    uppercase
-
-                    mb-4
-                  "
-                >
-                  0{service.id}
-                </p>
-
-                {/* TITLE */}
-                <h3
-                  className="
-                    text-white
-
-                    text-[11vw]
-                    md:text-[3.4vw]
-
-                    leading-[0.88]
-
-                    font-black
-
-                    tracking-[-0.08em]
-
-                    uppercase
-                  "
-                >
-                  {service.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-                <p
-                  className="
-                    mt-5
-
-                    max-w-md
-
-                    text-white/60
-
-                    text-[13px]
-                    md:text-[15px]
-
-                    leading-relaxed
-                  "
-                >
-                  {service.description}
-                </p>
-
-                {/* BUTTON */}
-                <div className="mt-8">
-                  <button
-                    className="
-                      inline-flex
-                      items-center
-                      justify-center
-
-                      px-5
-                      py-3
-
-                      rounded-full
-
-                      border
-                      border-white/20
-
-                      bg-white/10
-
-                      backdrop-blur-md
-
-                      text-white
-
-                      text-[10px]
-
-                      uppercase
-
-                      tracking-[0.25em]
-
-                      transition-all
-                      duration-500
-
-                      hover:bg-white
-                      hover:text-black
-                    "
-                  >
-                    Explore Service
-                  </button>
-                </div>
-              </div>
-
-              {/* GLOW */}
-              <div
-                className="
-                  absolute
-                  inset-0
-
-                  opacity-0
-                  group-hover:opacity-100
-
-                  transition-opacity
-                  duration-700
-
-                  bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.10),transparent_70%)]
-                "
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+      {/* CARDS */}
+      <div className="relative">
+        {services.map((service, index) => (
+          <Card
+            key={service.id}
+            service={service}
+            index={index}
+          />
+        ))}
       </div>
-
-      {/* BOTTOM SHADE */}
-      <div
-        className="
-          absolute
-          bottom-0
-          left-0
-
-          w-full
-          h-32
-
-          bg-gradient-to-t
-          from-black
-          to-transparent
-
-          pointer-events-none
-        "
-      />
     </section>
   );
 }

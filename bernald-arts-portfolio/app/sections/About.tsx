@@ -36,6 +36,7 @@ export default function About() {
         min-h-screen
         bg-[#f5f1eb]
         overflow-hidden
+        scroll-mb-0
       "
     >
       {/* Grain */}

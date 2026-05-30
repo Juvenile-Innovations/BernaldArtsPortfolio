@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentSection, setCurrentSection] = useState<string>("hero");
 
   const navLinks = [
     { number: "01", label: "ABOUT", href: "#about" },
@@ -25,10 +26,32 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const observerOptions = {
+      threshold: [0, 0.3, 0.7, 1],
+      rootMargin: "-50% 0px -50% 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id || "hero";
+          setCurrentSection(sectionId);
+        }
+      });
+    }, observerOptions);
+
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
   }, [isOpen]);
 
-  const isDarkText = scrolled || isOpen;
+  const isLightSection = currentSection === "about";
+  const isDarkText = isLightSection;
 
   return (
     <>
@@ -41,25 +64,35 @@ export default function Navbar() {
           z-[999]
 
           transition-all
-          duration-700
+          duration-500
 
           ${
-            scrolled
-              ? "bg-[#f5f1eb]/70 backdrop-blur-2xl border-b border-black/10"
+            isLightSection
+              ? scrolled
+                ? "bg-[#f5f1eb]/90 backdrop-blur-2xl border-b border-black/10"
+                : "bg-[#f5f1eb]/70 backdrop-blur-2xl border-b border-black/10"
+              : scrolled
+              ? "bg-black/40 backdrop-blur-2xl border-b border-white/10"
               : "bg-transparent"
           }
         `}
       >
         <div className="w-full px-5 md:px-10">
           <nav
-            className="
-              h-20
-              md:h-24
-
+            className={`
               flex
               items-center
               justify-between
-            "
+
+              transition-all
+              duration-500
+
+              ${
+                scrolled
+                  ? "h-16 md:h-20"
+                  : "h-20 md:h-24"
+              }
+            `}
           >
             {/* LOGO */}
             <div
@@ -88,7 +121,7 @@ export default function Navbar() {
                   justify-center
 
                   transition-all
-                  duration-700
+                  duration-500
 
                   ${
                     isDarkText
@@ -105,7 +138,7 @@ export default function Navbar() {
                     font-light
 
                     transition-all
-                    duration-700
+                    duration-500
 
                     ${
                       isDarkText
@@ -131,7 +164,7 @@ export default function Navbar() {
                     font-medium
 
                     transition-all
-                    duration-700
+                    duration-500
 
                     ${
                       isDarkText
@@ -153,7 +186,7 @@ export default function Navbar() {
                     tracking-[0.22em]
 
                     transition-all
-                    duration-700
+                    duration-500
 
                     ${
                       isDarkText
@@ -395,28 +428,38 @@ export default function Navbar() {
       >
         {/* BACKGROUND */}
         <div
-          className="
+          className={`
             absolute
             inset-0
 
             bg-cover
             bg-center
             bg-no-repeat
-          "
+
+            ${
+              isLightSection
+                ? "bg-[#f5f1eb]"
+                : "bg-black"
+            }
+          `}
           style={{
-            backgroundImage: "url('/images/menu-bg.png')",
+            backgroundImage: isLightSection ? "none" : "url('/images/menu-bg.png')",
           }}
         />
 
         <div
-          className="
+          className={`
             absolute
             inset-0
 
-            bg-black/5
+            ${
+              isLightSection
+                ? "bg-black/0"
+                : "bg-black/5"
+            }
 
             backdrop-blur-sm
-          "
+          `}
         />
 
         {/* CLOSE BUTTON */}
@@ -511,9 +554,13 @@ export default function Navbar() {
                   transition-all
                   duration-700
 
-                  hover:bg-black/10
-
                   group
+
+                  ${
+                    isLightSection
+                      ? "hover:bg-black/5"
+                      : "hover:bg-white/10"
+                  }
 
                   ${
                     isOpen
@@ -547,23 +594,25 @@ export default function Navbar() {
                     "
                   >
                     <span
-                      className="
+                      className={`
                         text-[9px]
 
                         tracking-[0.25em]
 
-                        text-black/40
-
                         font-semibold
-                      "
+
+                        ${
+                          isLightSection
+                            ? "text-black/40"
+                            : "text-white/40"
+                        }
+                      `}
                     >
                       {link.number}
                     </span>
 
                     <span
-                      className="
-                        text-black/90
-
+                      className={`
                         text-[18px]
                         md:text-[22px]
 
@@ -577,24 +626,34 @@ export default function Navbar() {
 
                         transition-transform
                         duration-300
-                      "
+
+                        ${
+                          isLightSection
+                            ? "text-black/90"
+                            : "text-white/90"
+                        }
+                      `}
                     >
                       {link.label}
                     </span>
                   </div>
 
                   <svg
-                    className="
+                    className={`
                       w-5
                       h-5
-
-                      text-black/40
 
                       group-hover:translate-x-1
 
                       transition-all
                       duration-300
-                    "
+
+                      ${
+                        isLightSection
+                          ? "text-black/40"
+                          : "text-white/40"
+                      }
+                    `}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -618,7 +677,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="
+            className={`
               group
               relative
 
@@ -626,10 +685,6 @@ export default function Navbar() {
 
               px-6
               py-5
-
-              bg-black
-
-              text-white
 
               text-center
 
@@ -642,13 +697,18 @@ export default function Navbar() {
               rounded-xl
 
               border
-              border-black/50
 
               transition-all
               duration-500
 
               overflow-hidden
-            "
+
+              ${
+                isLightSection
+                  ? "bg-black text-white border-black/50"
+                  : "bg-white text-black border-white/50"
+              }
+            `}
           >
             <div
               className="

@@ -70,10 +70,10 @@ ${formData.comments}
         relative
         overflow-hidden
 
-        py-24
-        md:py-36
+        py-28
+        md:py-40
 
-        bg-black
+        bg-[radial-gradient(circle_at_top_left,#2b1a08_0%,#120d08_18%,#050505_42%,#000000_100%)]
 
         text-white
       "
@@ -84,7 +84,7 @@ ${formData.comments}
           absolute
           inset-0
 
-          opacity-[0.04]
+          opacity-[0.03]
 
           mix-blend-soft-light
 
@@ -96,48 +96,142 @@ ${formData.comments}
         }}
       />
 
-      {/* GOLD GLOW */}
-
-      
+      {/* GOLD ORB 1 */}
       <motion.div
         className="
           absolute
           top-[-10%]
           left-[-10%]
 
-          w-[500px]
-          h-[500px]
+          w-[700px]
+          h-[700px]
 
           rounded-full
 
-          bg-[#d4a24c]/20
+          bg-[#d4a24c]/10
 
-          blur-[160px]
+          blur-[180px]
         "
         animate={{
           x: [0, 80, 0],
           y: [0, 60, 0],
         }}
         transition={{
-          duration: 16,
+          duration: 18,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
 
+      {/* GOLD ORB 2 */}
+      <motion.div
+        className="
+          absolute
+          bottom-[-20%]
+          right-[-10%]
+
+          w-[800px]
+          h-[800px]
+
+          rounded-full
+
+          bg-[#f6d28f]/[0.05]
+
+          blur-[220px]
+        "
+        animate={{
+          x: [0, -60, 0],
+          y: [0, 50, 0],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* FLOATING FLOWER PATTERNS */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{
+            left: `${(i * 12.5) % 100}%`,
+            top: `${(i * 15) % 100}%`,
+          }}
+          animate={{
+            opacity: [0.3, 0.7, 0.3],
+            y: [0, -50, 0],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 8 + i,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {/* FLOWER BLOOM */}
+          {[...Array(6)].map((_, petal) => (
+            <motion.div
+              key={petal}
+              className="
+                absolute
+
+                w-5
+                h-8
+
+                rounded-full
+
+                bg-gradient-to-b
+                from-[#f3d08a]/60
+                to-[#d4a24c]/30
+
+                blur-sm
+              "
+              style={{
+                left: "50%",
+                top: "50%",
+                transform: `translate(-50%, -50%) rotate(${(petal * 60)}deg) translateY(-20px)`,
+              }}
+            />
+          ))}
+
+          {/* CENTER CIRCLE */}
+          <div
+            className="
+              absolute
+
+              w-3
+              h-3
+
+              rounded-full
+
+              bg-[#f6d28f]/80
+              blur-sm
+
+              left-1/2
+              top-1/2
+
+              -translate-x-1/2
+              -translate-y-1/2
+            "
+          />
+        </motion.div>
+      ))}
+
       <Container>
         {/* HEADER */}
         <ScrollReveal direction="up">
-          <div className="text-center mb-20">
+          <div className="text-center mb-24">
             <p
               className="
                 text-[11px]
 
                 uppercase
 
-                tracking-[0.4em]
+                tracking-[0.45em]
 
-                text-[#d4a24c]
+                text-[#f3d08a]
 
                 mb-6
               "
@@ -150,7 +244,7 @@ ${formData.comments}
                 text-[16vw]
                 md:text-[7vw]
 
-                leading-[0.82]
+                leading-[0.8]
 
                 font-black
 
@@ -195,35 +289,87 @@ ${formData.comments}
             className="
               relative
 
-              max-w-5xl
+              max-w-6xl
 
               mx-auto
 
-              rounded-[32px]
+              overflow-hidden
 
               border
-              border-white/10
+              border-[#f3d08a]/10
 
-              bg-white/[0.03]
+              bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]
 
-              backdrop-blur-2xl
+              backdrop-blur-3xl
 
               p-6
-              md:p-12
+              md:p-14
+
+              shadow-[0_20px_120px_rgba(212,162,76,0.08)]
+
+              before:absolute
+              before:inset-0
+              before:border
+              before:border-white/[0.03]
             "
           >
-            {/* INNER GLOW */}
+            {/* TOP GOLD LINE */}
+            <div
+              className="
+                absolute
+                top-0
+                left-0
+
+                w-full
+                h-px
+
+                bg-gradient-to-r
+                from-transparent
+                via-[#f6d28f]/70
+                to-transparent
+              "
+            />
+
+            {/* INNER LIGHT */}
             <div
               className="
                 absolute
                 inset-0
 
-                rounded-[32px]
-
-                bg-[radial-gradient(circle_at_top,rgba(212,162,76,0.12),transparent_70%)]
+                bg-[radial-gradient(circle_at_top,rgba(246,210,143,0.10),transparent_70%)]
 
                 pointer-events-none
               "
+            />
+
+            {/* MASSIVE GLASS BALL */}
+            <motion.div
+              className="
+                absolute
+                top-[-15%]
+                right-[-5%]
+
+                w-[300px]
+                h-[300px]
+
+                rounded-full
+
+                border
+                border-[#f6d28f]/10
+
+                bg-white/[0.04]
+
+                backdrop-blur-3xl
+              "
+              animate={{
+                y: [0, -30, 0],
+                x: [0, 20, 0],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             />
 
             <div
@@ -238,106 +384,73 @@ ${formData.comments}
                 gap-6
               "
             >
-              {/* NAME */}
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="
-                  w-full
+              {/* INPUT STYLE */}
+              {[
+                {
+                  type: "text",
+                  name: "name",
+                  placeholder: "Full Name",
+                },
 
-                  px-5
-                  py-4
+                {
+                  type: "tel",
+                  name: "mobile",
+                  placeholder: "Mobile Number",
+                },
 
-                  rounded-2xl
+                {
+                  type: "text",
+                  name: "location",
+                  placeholder: "Location / City",
+                },
 
-                  bg-white/[0.04]
+                {
+                  type: "text",
+                  name: "size",
+                  placeholder: "Size in Sq.ft",
+                },
+              ].map((field) => (
+                <input
+                  key={field.name}
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={
+                    formData[
+                      field.name as keyof typeof formData
+                    ]
+                  }
+                  onChange={handleChange}
+                  required
+                  className="
+                    w-full
 
-                  border
-                  border-white/10
+                    px-5
+                    py-4
 
-                  text-white
+                    bg-white/[0.025]
 
-                  placeholder:text-white/30
+                    border
+                    border-white/10
 
-                  outline-none
+                    text-white
 
-                  focus:border-[#d4a24c]
+                    placeholder:text-white/30
 
-                  transition-all
-                "
-              />
+                    outline-none
 
-              {/* MOBILE */}
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="Mobile Number"
-                value={formData.mobile}
-                onChange={handleChange}
-                required
-                className="
-                  w-full
+                    transition-all
+                    duration-500
 
-                  px-5
-                  py-4
+                    shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]
 
-                  rounded-2xl
+                    focus:border-[#f6d28f]/40
+                    focus:bg-white/[0.04]
+                  "
+                />
+              ))}
 
-                  bg-white/[0.04]
-
-                  border
-                  border-white/10
-
-                  text-white
-
-                  placeholder:text-white/30
-
-                  outline-none
-
-                  focus:border-[#d4a24c]
-
-                  transition-all
-                "
-              />
-
-              {/* LOCATION */}
-              <input
-                type="text"
-                name="location"
-                placeholder="Location / City"
-                value={formData.location}
-                onChange={handleChange}
-                required
-                className="
-                  w-full
-
-                  px-5
-                  py-4
-
-                  rounded-2xl
-
-                  bg-white/[0.04]
-
-                  border
-                  border-white/10
-
-                  text-white
-
-                  placeholder:text-white/30
-
-                  outline-none
-
-                  focus:border-[#d4a24c]
-
-                  transition-all
-                "
-              />
-
-              {/* ART TYPE */}
+              {/* SELECT */}
               <select
                 name="artType"
                 value={formData.artType}
@@ -349,9 +462,7 @@ ${formData.comments}
                   px-5
                   py-4
 
-                  rounded-2xl
-
-                  bg-black
+                  bg-black/60
 
                   border
                   border-white/10
@@ -360,9 +471,10 @@ ${formData.comments}
 
                   outline-none
 
-                  focus:border-[#d4a24c]
-
                   transition-all
+                  duration-500
+
+                  focus:border-[#f6d28f]/40
                 "
               >
                 <option value="">
@@ -398,39 +510,6 @@ ${formData.comments}
                 </option>
               </select>
 
-              {/* SIZE */}
-              <input
-                type="text"
-                name="size"
-                placeholder="Size in Sq.ft"
-                value={formData.size}
-                onChange={handleChange}
-                required
-                className="
-                  w-full
-
-                  px-5
-                  py-4
-
-                  rounded-2xl
-
-                  bg-white/[0.04]
-
-                  border
-                  border-white/10
-
-                  text-white
-
-                  placeholder:text-white/30
-
-                  outline-none
-
-                  focus:border-[#d4a24c]
-
-                  transition-all
-                "
-              />
-
               {/* DATE */}
               <input
                 type="date"
@@ -444,9 +523,7 @@ ${formData.comments}
                   px-5
                   py-4
 
-                  rounded-2xl
-
-                  bg-black
+                  bg-black/60
 
                   border
                   border-white/10
@@ -455,13 +532,14 @@ ${formData.comments}
 
                   outline-none
 
-                  focus:border-[#d4a24c]
-
                   transition-all
+                  duration-500
+
+                  focus:border-[#f6d28f]/40
                 "
               />
 
-              {/* COMMENTS */}
+              {/* TEXTAREA */}
               <textarea
                 name="comments"
                 placeholder="Additional Comments (Optional)"
@@ -476,9 +554,7 @@ ${formData.comments}
                   px-5
                   py-5
 
-                  rounded-2xl
-
-                  bg-white/[0.04]
+                  bg-white/[0.025]
 
                   border
                   border-white/10
@@ -491,9 +567,13 @@ ${formData.comments}
 
                   resize-none
 
-                  focus:border-[#d4a24c]
-
                   transition-all
+                  duration-500
+
+                  shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]
+
+                  focus:border-[#f6d28f]/40
+                  focus:bg-white/[0.04]
                 "
               />
 
@@ -502,10 +582,10 @@ ${formData.comments}
                 <motion.button
                   type="submit"
                   whileHover={{
-                    scale: 1.02,
+                    scale: 1.01,
                   }}
                   whileTap={{
-                    scale: 0.98,
+                    scale: 0.99,
                   }}
                   className="
                     relative
@@ -516,12 +596,10 @@ ${formData.comments}
 
                     py-5
 
-                    rounded-2xl
-
                     bg-gradient-to-r
-                    from-[#d4a24c]
-                    via-[#f3d08a]
-                    to-[#b8862d]
+                    from-[#9f6b1b]
+                    via-[#f6d28f]
+                    to-[#7a4d10]
 
                     text-black
 
@@ -529,26 +607,21 @@ ${formData.comments}
 
                     uppercase
 
-                    tracking-[0.28em]
+                    tracking-[0.3em]
 
                     text-sm
 
-                    shadow-[0_0_40px_rgba(212,162,76,0.28)]
+                    shadow-[0_10px_60px_rgba(212,162,76,0.22)]
 
                     transition-all
                     duration-500
                   "
                 >
-                  <span
-                    className="
-                      relative
-                      z-10
-                    "
-                  >
+                  <span className="relative z-10">
                     Book Your Art
                   </span>
 
-                  {/* SHINE */}
+                  {/* METAL SHINE */}
                   <div
                     className="
                       absolute
@@ -558,7 +631,7 @@ ${formData.comments}
 
                       bg-gradient-to-r
                       from-transparent
-                      via-white/30
+                      via-white/40
                       to-transparent
 
                       hover:translate-x-[100%]

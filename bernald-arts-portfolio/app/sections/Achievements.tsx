@@ -9,14 +9,18 @@ import { motion } from "framer-motion";
 export default function Achievements() {
   return (
     <section
+      id="achievement"
       className="
         relative
         overflow-hidden
 
-        py-24
-        md:py-36
+        py-28
+        md:py-40
 
-        bg-black
+        bg-gradient-to-br
+        from-black
+        via-slate-950
+        to-[#12091f]
 
         text-white
       "
@@ -27,7 +31,7 @@ export default function Achievements() {
           absolute
           inset-0
 
-          opacity-[0.04]
+          opacity-[0.03]
 
           mix-blend-soft-light
 
@@ -38,53 +42,31 @@ export default function Achievements() {
         }}
       />
 
-      {/* LARGE GLOW ORBS */}
+      {/* BIG GLASS ORB 1 */}
       <motion.div
         className="
           absolute
-          top-[-10%]
-          left-[-10%]
+          top-[-12%]
+          left-[-8%]
 
-          w-[420px]
-          h-[420px]
+          w-[700px]
+          h-[700px]
 
           rounded-full
 
-          bg-[#7c3aed]/20
+          border
+          border-white/10
 
-          blur-[140px]
+          bg-white/[0.03]
+
+          backdrop-blur-3xl
+
+          blur-[120px]
         "
         animate={{
           x: [0, 80, 0],
           y: [0, 60, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      <motion.div
-        className="
-          absolute
-          bottom-[-10%]
-          right-[-10%]
-
-          w-[500px]
-          h-[500px]
-
-          rounded-full
-
-          bg-[#2563eb]/20
-
-          blur-[160px]
-        "
-        animate={{
-          x: [0, -80, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.12, 1],
+          scale: [1, 1.08, 1],
         }}
         transition={{
           duration: 18,
@@ -93,8 +75,41 @@ export default function Achievements() {
         }}
       />
 
-      {/* FLOATING BUBBLES */}
-      {[...Array(12)].map((_, i) => (
+      {/* BIG GLASS ORB 2 */}
+      <motion.div
+        className="
+          absolute
+          bottom-[-20%]
+          right-[-10%]
+
+          w-[800px]
+          h-[800px]
+
+          rounded-full
+
+          border
+          border-indigo-300/10
+
+          bg-indigo-300/[0.04]
+
+          backdrop-blur-3xl
+
+          blur-[140px]
+        "
+        animate={{
+          x: [0, -90, 0],
+          y: [0, -70, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* FLOATING MASSIVE GLASS BUBBLES */}
+      {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
           className="
@@ -107,21 +122,21 @@ export default function Achievements() {
 
             bg-white/[0.03]
 
-            backdrop-blur-md
+            backdrop-blur-2xl
           "
           style={{
-            width: `${40 + i * 6}px`,
-            height: `${40 + i * 6}px`,
-            left: `${(i * 8) % 100}%`,
-            top: `${(i * 13) % 100}%`,
+            width: `${90 + i * 22}px`,
+            height: `${90 + i * 22}px`,
+            left: `${(i * 11) % 100}%`,
+            top: `${(i * 9) % 100}%`,
           }}
           animate={{
-            y: [0, -40, 0],
-            x: [0, 20, 0],
-            opacity: [0.15, 0.35, 0.15],
+            y: [0, -70, 0],
+            x: [0, 35, 0],
+            opacity: [0.08, 0.18, 0.08],
           }}
           transition={{
-            duration: 6 + i,
+            duration: 8 + i,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -138,9 +153,9 @@ export default function Achievements() {
 
                 uppercase
 
-                tracking-[0.38em]
+                tracking-[0.4em]
 
-                text-white/40
+                text-white/35
 
                 mb-6
               "
@@ -153,7 +168,7 @@ export default function Achievements() {
                 text-[16vw]
                 md:text-[7vw]
 
-                leading-[0.82]
+                leading-[0.8]
 
                 font-black
 
@@ -177,7 +192,7 @@ export default function Achievements() {
 
                 mx-auto
 
-                text-white/55
+                text-white/50
 
                 text-sm
                 md:text-lg
@@ -202,31 +217,34 @@ export default function Achievements() {
             md:grid-cols-2
             xl:grid-cols-4
 
-            gap-6
+            gap-7
           "
         >
           {stats.map((stat, index) => (
             <ScrollReveal
               key={index}
               direction="up"
-              delay={index * 0.1}
+              delay={index * 0.12}
             >
               <motion.div
                 initial={{
                   opacity: 0,
-                  y: 80,
+                  y: -140,
+                  scale: 0.9,
                 }}
                 whileInView={{
                   opacity: 1,
                   y: 0,
+                  scale: 1,
                 }}
                 transition={{
-                  duration: 1,
-                  delay: index * 0.1,
+                  duration: 1.2,
+                  delay: index * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
                 viewport={{ once: true }}
                 whileHover={{
-                  y: -10,
+                  y: -12,
                   scale: 1.02,
                 }}
                 className="
@@ -234,24 +252,26 @@ export default function Achievements() {
 
                   overflow-hidden
 
-                  rounded-[28px]
+                  rounded-[34px]
 
                   border
                   border-white/10
 
                   bg-white/[0.04]
 
-                  backdrop-blur-xl
+                  backdrop-blur-2xl
 
                   p-8
                   md:p-10
 
-                  min-h-[280px]
+                  min-h-[300px]
+
+                  shadow-[0_0_80px_rgba(255,255,255,0.03)]
 
                   group
                 "
               >
-                {/* INNER GLOW */}
+                {/* INNER PREMIUM LIGHT */}
                 <div
                   className="
                     absolute
@@ -263,37 +283,38 @@ export default function Achievements() {
                     transition-opacity
                     duration-700
 
-                    bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_70%)]
+                    bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]
                   "
                 />
 
-                {/* FLOATING MINI ORB */}
+                {/* MASSIVE GLASS BUBBLE */}
                 <motion.div
                   className="
                     absolute
-                    top-5
-                    right-5
+                    top-[-10%]
+                    right-[-10%]
 
-                    w-16
-                    h-16
+                    w-36
+                    h-36
 
                     rounded-full
-
-                    bg-white/[0.05]
 
                     border
                     border-white/10
 
-                    backdrop-blur-md
+                    bg-white/[0.05]
+
+                    backdrop-blur-2xl
                   "
                   animate={{
-                    y: [0, -10, 0],
+                    y: [0, -20, 0],
+                    x: [0, 12, 0],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 6,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: index * 0.2,
+                    delay: index * 0.3,
                   }}
                 />
 
@@ -314,15 +335,15 @@ export default function Achievements() {
 
                     text-white
 
-                    mb-4
+                    mb-5
                   "
                   animate={{
-                    scale: [1, 1.04, 1],
+                    scale: [1, 1.03, 1],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
-                    delay: index * 0.3,
+                    delay: index * 0.2,
                   }}
                 >
                   {stat.value}
@@ -335,7 +356,7 @@ export default function Achievements() {
                     z-10
 
                     text-[13px]
-                    md:text-[16px]
+                    md:text-[15px]
 
                     uppercase
 
@@ -358,7 +379,7 @@ export default function Achievements() {
                       relative
                       z-10
 
-                      text-white/50
+                      text-white/45
 
                       text-sm
 
