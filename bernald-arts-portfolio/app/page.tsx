@@ -102,19 +102,6 @@ export default function Home() {
         <Services />
       </motion.section>
 
-      {/* ACHIEVEMENTS */}
-      <motion.section
-        style={{
-          y: achievementsY,
-        }}
-        className="
-          relative
-          z-[6]
-        "
-      >
-        <Achievements />
-      </motion.section>
-
       {/* GALLERY */}
       <motion.section
         style={{
@@ -122,10 +109,23 @@ export default function Home() {
         }}
         className="
           relative
-          z-[8]
+          z-[6]
         "
       >
         <Gallery />
+      </motion.section>
+
+      {/* ACHIEVEMENTS */}
+      <motion.section
+        style={{
+          y: achievementsY,
+        }}
+        className="
+          relative
+          z-[8]
+        "
+      >
+        <Achievements />
       </motion.section>
 
       {/* CONTACT */}

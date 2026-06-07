@@ -73,7 +73,10 @@ ${formData.comments}
         py-28
         md:py-40
 
-        bg-[radial-gradient(circle_at_top_left,#2b1a08_0%,#120d08_18%,#050505_42%,#000000_100%)]
+        bg-gradient-to-b
+        from-[#2b1a08]
+        via-[#1a0d08]
+        to-black
 
         text-white
       "
@@ -257,28 +260,6 @@ ${formData.comments}
               <br />
               Your Art
             </h2>
-
-            <p
-              className="
-                mt-8
-
-                max-w-2xl
-
-                mx-auto
-
-                text-white/50
-
-                text-sm
-                md:text-lg
-
-                leading-relaxed
-              "
-            >
-              Share your vision and let us
-              craft a cinematic artistic
-              experience tailored uniquely
-              for your space.
-            </p>
           </div>
         </ScrollReveal>
 

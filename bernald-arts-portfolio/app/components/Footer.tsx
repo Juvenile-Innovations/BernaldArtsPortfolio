@@ -1,484 +1,297 @@
 "use client";
 
-import React from "react";
-
-import {
-  motion,
-} from "framer-motion";
-
 import Container from "./Container";
+import VantaBackground from "./VantaBackground";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer
-      className="
-        relative
-        overflow-hidden
-
-        bg-[#f7f4ef]
-
-        text-black
-
-        pt-24
-        pb-10
-      "
+    <VantaBackground
+      type="globe"
+      color={0xd4af37}
+      backgroundColor={0x202428}
     >
-      {/* NOISE */}
-      <div
+      <footer
         className="
-          absolute
-          inset-0
+          relative
 
-          opacity-[0.03]
+          min-h-screen
 
-          mix-blend-multiply
+          flex
+          items-center
 
-          pointer-events-none
+          overflow-hidden
         "
-        style={{
-          backgroundImage:
-            "url('/noise.png')",
-        }}
-      />
-
-      {/* GOLD LIGHT */}
-      <motion.div
-        className="
-          absolute
-          top-[-20%]
-          left-[-10%]
-
-          w-[700px]
-          h-[700px]
-
-          rounded-full
-
-          bg-[#d4a24c]/10
-
-          blur-[180px]
-        "
-        animate={{
-          x: [0, 80, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* PINK LIGHT */}
-      <motion.div
-        className="
-          absolute
-          bottom-[-20%]
-          right-[-10%]
-
-          w-[700px]
-          h-[700px]
-
-          rounded-full
-
-          bg-[#ff8ab8]/10
-
-          blur-[200px]
-        "
-        animate={{
-          x: [0, -60, 0],
-          y: [0, -40, 0],
-        }}
-        transition={{
-          duration: 24,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* FLOATING PARTICLES */}
-      {[...Array(12)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="
-            absolute
-
-            w-[2px]
-            h-[2px]
-
-            rounded-full
-
-            bg-[#d4a24c]
-
-            blur-[1px]
-          "
-          style={{
-            left: `${(i * 8) % 100}%`,
-            top: `${(i * 9) % 100}%`,
-          }}
-          animate={{
-            opacity: [0, 0.7, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 5 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-
-      <Container>
-        {/* TOP */}
+      >
+        {/* Soft White Overlay */}
         <div
           className="
-            relative
-            z-10
+            absolute
+            inset-0
 
-            grid
-            grid-cols-1
-            md:grid-cols-3
+            bg-white/70
 
-            gap-12
-
-            pb-20
+            backdrop-blur-[0px]
           "
-        >
-          {/* BRAND */}
-          <div>
-            <p
-              className="
-                text-[11px]
+        />
 
-                uppercase
+        <Container>
+          <div
+            className="
+              relative
+              z-10
 
-                tracking-[0.45em]
+              min-h-screen
 
-                text-[#b8862d]
+              flex
+              flex-col
 
-                mb-5
-              "
-            >
-              Bernald Arts
-            </p>
+              justify-between
 
-            <h3
-              className="
-                text-[14vw]
-                sm:text-[9vw]
-                md:text-[4vw]
-
-                leading-[0.82]
-
-                font-black
-
-                tracking-[-0.08em]
-
-                uppercase
-
-                mb-6
-              "
-            >
-              Visual
-              <br />
-              Luxury
-            </h3>
-
-            <p
-              className="
-                max-w-sm
-
-                text-black/55
-
-                text-sm
-                md:text-base
-
-                leading-relaxed
-              "
-            >
-              Crafting immersive artistic
-              experiences through cinematic
-              textures, luxury aesthetics,
-              and timeless visual storytelling.
-            </p>
-          </div>
-
-          {/* LINKS */}
-          <div>
-            <p
-              className="
-                text-[12px]
-
-                uppercase
-
-                tracking-[0.35em]
-
-                text-black/40
-
-                mb-8
-              "
-            >
-              Navigation
-            </p>
-
-            <ul
-              className="
-                space-y-5
-              "
-            >
-              {[
-                "About",
-                "Services",
-                "Gallery",
-                "Contact",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="
-                      group
-
-                      inline-flex
-                      items-center
-
-                      gap-3
-
-                      text-black/70
-
-                      hover:text-black
-
-                      transition-all
-                      duration-500
-                    "
-                  >
-                    <span
-                      className="
-                        w-0
-                        group-hover:w-6
-
-                        h-px
-
-                        bg-[#b8862d]
-
-                        transition-all
-                        duration-500
-                      "
-                    />
-
-                    <span
-                      className="
-                        text-lg
-                        md:text-xl
-
-                        tracking-[-0.03em]
-                      "
-                    >
-                      {item}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <p
-              className="
-                text-[12px]
-
-                uppercase
-
-                tracking-[0.35em]
-
-                text-black/40
-
-                mb-8
-              "
-            >
-              Contact
-            </p>
-
+              py-20
+            "
+          >
+            {/* TOP */}
             <div
               className="
-                space-y-5
+                flex
+                flex-col
+
+                lg:flex-row
+
+                lg:items-end
+                lg:justify-between
+
+                gap-16
               "
             >
               <div>
                 <p
                   className="
-                    text-black/35
+                    uppercase
 
-                    text-[11px]
+                    tracking-[0.5em]
+
+                    text-[#b8862d]
+
+                    text-xs
+
+                    mb-6
+                  "
+                >
+                  Fine Art Studio
+                </p>
+
+                <h1
+                  className="
+                    text-[22vw]
+                    md:text-[12vw]
+
+                    leading-[0.8]
+
+                    font-black
+
+                    tracking-[-0.08em]
 
                     uppercase
 
-                    tracking-[0.25em]
-
-                    mb-2
+                    text-[#b8862d]
                   "
                 >
-                  Email
-                </p>
-
-                <a
-                  href="mailto:hello@bernaldarts.com"
-                  className="
-                    text-black/75
-
-                    hover:text-black
-
-                    transition
-                  "
-                >
-                  hello@bernaldarts.com
-                </a>
+                  Bernald
+                  <br />
+                  Arts
+                </h1>
               </div>
 
-              <div>
+              <div
+                className="
+                  max-w-md
+                "
+              >
                 <p
                   className="
-                    text-black/35
+                    text-black/60
 
-                    text-[11px]
+                    text-lg
 
-                    uppercase
-
-                    tracking-[0.25em]
-
-                    mb-2
+                    leading-relaxed
                   "
                 >
-                  Phone
-                </p>
-
-                <a
-                  href="tel:+15551234567"
-                  className="
-                    text-black/75
-
-                    hover:text-black
-
-                    transition
-                  "
-                >
-                  +1 (555) 123-4567
-                </a>
-              </div>
-
-              <div>
-                <p
-                  className="
-                    text-black/35
-
-                    text-[11px]
-
-                    uppercase
-
-                    tracking-[0.25em]
-
-                    mb-2
-                  "
-                >
-                  Location
-                </p>
-
-                <p
-                  className="
-                    text-black/75
-                  "
-                >
-                  New York, NY
+                  Creating timeless artwork through
+                  imagination, craftsmanship and
+                  visual storytelling.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* DIVIDER */}
-        <div
-          className="
-            relative
+            {/* MIDDLE */}
+            <div
+              className="
+                grid
 
-            h-px
+                grid-cols-1
+                md:grid-cols-3
 
-            bg-gradient-to-r
-            from-transparent
-            via-black/10
-            to-transparent
+                gap-12
+              "
+            >
+              <div>
+                <h3
+                  className="
+                    text-[#b8862d]
 
-            mb-10
-          "
-        />
+                    uppercase
 
-        {/* BOTTOM */}
-        <div
-          className="
-            relative
-            z-10
+                    tracking-[0.3em]
 
-            flex
-            flex-col
-            md:flex-row
+                    text-xs
 
-            items-center
-            justify-between
+                    mb-6
+                  "
+                >
+                  Navigation
+                </h3>
 
-            gap-6
-          "
-        >
-          <p
-            className="
-              text-black/45
+                <div className="space-y-4">
+                  {[
+                    "About",
+                    "Services",
+                    "Gallery",
+                    "Contact",
+                  ].map((item) => (
+                    <a
+                      key={item}
+                      href={`#${item.toLowerCase()}`}
+                      className="
+                        block
 
-              text-sm
-            "
-          >
-            © {currentYear} Bernald Arts.
-            All rights reserved.
-          </p>
+                        text-2xl
 
-          {/* SOCIALS */}
-          <div
-            className="
-              flex
-              items-center
+                        text-black/70
 
-              gap-6
-            "
-          >
-            {[
-              "Instagram",
-              "Twitter",
-              "LinkedIn",
-            ].map((social) => (
-              <a
-                key={social}
-                href="#"
+                        hover:text-[#b8862d]
+
+                        transition-all
+                      "
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3
+                  className="
+                    text-[#b8862d]
+
+                    uppercase
+
+                    tracking-[0.3em]
+
+                    text-xs
+
+                    mb-6
+                  "
+                >
+                  Contact
+                </h3>
+
+                <div className="space-y-4 text-black/70">
+                  <p>hello@bernaldarts.com</p>
+                  <p>+91 90475 76773</p>
+                  <p>Tamil Nadu, India</p>
+                </div>
+              </div>
+
+              <div>
+                <h3
+                  className="
+                    text-[#b8862d]
+
+                    uppercase
+
+                    tracking-[0.3em]
+
+                    text-xs
+
+                    mb-6
+                  "
+                >
+                  Follow
+                </h3>
+
+                <div className="space-y-4">
+                  <a
+                    href="#"
+                    className="block text-black/70 hover:text-[#b8862d]"
+                  >
+                    Instagram
+                  </a>
+
+                  <a
+                    href="#"
+                    className="block text-black/70 hover:text-[#b8862d]"
+                  >
+                    Facebook
+                  </a>
+
+                  <a
+                    href="#"
+                    className="block text-black/70 hover:text-[#b8862d]"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* BOTTOM */}
+            <div
+              className="
+                pt-10
+
+                border-t
+                border-[#d4af37]/20
+
+                flex
+                flex-col
+                md:flex-row
+
+                items-center
+                justify-between
+
+                gap-4
+              "
+            >
+              <p
                 className="
-                  relative
-
-                  text-black/55
-
-                  hover:text-black
-
-                  uppercase
-
-                  tracking-[0.25em]
-
-                  text-[11px]
-
-                  transition-all
-                  duration-500
+                  text-black/50
                 "
               >
-                {social}
-              </a>
-            ))}
+                © {currentYear} Bernald Arts.
+                All rights reserved.
+              </p>
+
+              <p
+                className="
+                  uppercase
+
+                  tracking-[0.3em]
+
+                  text-xs
+
+                  text-black/40
+                "
+              >
+                Crafted With Passion
+              </p>
+            </div>
           </div>
-        </div>
-      </Container>
-    </footer>
+        </Container>
+      </footer>
+    </VantaBackground>
   );
 }

@@ -1,417 +1,216 @@
 "use client";
 
 import Container from "../components/Container";
-import ScrollReveal from "../components/ScrollReveal";
+import VantaBackground from "../components/VantaBackground";
 import { stats } from "../data/stats";
-
-import { motion } from "framer-motion";
 
 export default function Achievements() {
   return (
-    <section
-      id="achievement"
-      className="
-        relative
-        overflow-hidden
-
-        py-28
-        md:py-40
-
-        bg-gradient-to-br
-        from-black
-        via-slate-950
-        to-[#12091f]
-
-        text-white
-      "
+    <VantaBackground
+      type="halo"
+      color={0xd4af37}
+      backgroundColor={0x12091f}
     >
-      {/* NOISE */}
-      <div
+      <section
+        id="achievement"
         className="
-          absolute
-          inset-0
+          relative
+          min-h-screen
 
-          opacity-[0.03]
+          flex
+          items-center
 
-          mix-blend-soft-light
+          md:py-32
 
-          pointer-events-none
+          text-white
         "
-        style={{
-          backgroundImage: "url('/noise.png')",
-        }}
-      />
-
-      {/* BIG GLASS ORB 1 */}
-      <motion.div
-        className="
-          absolute
-          top-[-12%]
-          left-[-8%]
-
-          w-[700px]
-          h-[700px]
-
-          rounded-full
-
-          border
-          border-white/10
-
-          bg-white/[0.03]
-
-          backdrop-blur-3xl
-
-          blur-[120px]
-        "
-        animate={{
-          x: [0, 80, 0],
-          y: [0, 60, 0],
-          scale: [1, 1.08, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* BIG GLASS ORB 2 */}
-      <motion.div
-        className="
-          absolute
-          bottom-[-20%]
-          right-[-10%]
-
-          w-[800px]
-          h-[800px]
-
-          rounded-full
-
-          border
-          border-indigo-300/10
-
-          bg-indigo-300/[0.04]
-
-          backdrop-blur-3xl
-
-          blur-[140px]
-        "
-        animate={{
-          x: [0, -90, 0],
-          y: [0, -70, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* FLOATING MASSIVE GLASS BUBBLES */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="
-            absolute
-
-            rounded-full
-
-            border
-            border-white/10
-
-            bg-white/[0.03]
-
-            backdrop-blur-2xl
-          "
-          style={{
-            width: `${90 + i * 22}px`,
-            height: `${90 + i * 22}px`,
-            left: `${(i * 11) % 100}%`,
-            top: `${(i * 9) % 100}%`,
-          }}
-          animate={{
-            y: [0, -70, 0],
-            x: [0, 35, 0],
-            opacity: [0.08, 0.18, 0.08],
-          }}
-          transition={{
-            duration: 8 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-
-      <Container>
-        {/* HEADER */}
-        <ScrollReveal direction="up">
-          <div className="relative z-10 text-center mb-24">
-            <p
-              className="
-                text-[11px]
-
-                uppercase
-
-                tracking-[0.4em]
-
-                text-white/35
-
-                mb-6
-              "
-            >
-              ACHIEVEMENTS
-            </p>
-
-            <h2
-              className="
-                text-[16vw]
-                md:text-[7vw]
-
-                leading-[0.8]
-
-                font-black
-
-                tracking-[-0.08em]
-
-                uppercase
-
-                text-white
-              "
-            >
-              Creative
-              <br />
-              Milestones
-            </h2>
-
-            <p
-              className="
-                mt-8
-
-                max-w-2xl
-
-                mx-auto
-
-                text-white/50
-
-                text-sm
-                md:text-lg
-
-                leading-relaxed
-              "
-            >
-              A journey shaped through artistic excellence,
-              immersive storytelling, and years of visual craftsmanship.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        {/* STATS */}
+      >
+        {/* Dark Overlay */}
         <div
           className="
-            relative
-            z-10
+            absolute
+            inset-0
 
-            grid
-            grid-cols-1
-            md:grid-cols-2
-            xl:grid-cols-4
-
-            gap-7
+            bg-gradient-to-b
+            from-black/40
+            via-black/50
+            to-black/70
           "
-        >
-          {stats.map((stat, index) => (
-            <ScrollReveal
-              key={index}
-              direction="up"
-              delay={index * 0.12}
-            >
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: -140,
-                  scale: 0.9,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                }}
-                transition={{
-                  duration: 1.2,
-                  delay: index * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                viewport={{ once: true }}
-                whileHover={{
-                  y: -12,
-                  scale: 1.02,
-                }}
+        />
+
+        <Container>
+          <div className="relative z-10">
+            {/* HEADER */}
+
+            <div className="text-center mb-20">
+              <p
                 className="
-                  relative
+                  text-[#d4af37]
 
-                  overflow-hidden
+                  uppercase
 
-                  rounded-[34px]
+                  tracking-[0.45em]
 
-                  border
-                  border-white/10
+                  text-xs
 
-                  bg-white/[0.04]
-
-                  backdrop-blur-2xl
-
-                  p-8
-                  md:p-10
-
-                  min-h-[300px]
-
-                  shadow-[0_0_80px_rgba(255,255,255,0.03)]
-
-                  group
+                  mb-4
                 "
               >
-                {/* INNER PREMIUM LIGHT */}
+                ACHIEVEMENTS
+              </p>
+
+              <h2
+                className="
+                  text-5xl
+                  md:text-7xl
+                  lg:text-8xl
+
+                  font-black
+
+                  uppercase
+
+                  leading-none
+
+                  mb-6
+                "
+              >
+                Creative
+                <br />
+                Milestones
+              </h2>
+
+              <p
+                className="
+                  max-w-3xl
+                  mx-auto
+
+                  text-white/70
+
+                  text-sm
+                  md:text-lg
+
+                  leading-relaxed
+                "
+              >
+                Every artwork tells a story.
+                Every milestone reflects years of
+                dedication, creativity, and artistic
+                excellence.
+              </p>
+            </div>
+
+            {/* STATS GRID */}
+
+            <div
+              className="
+                grid
+
+                grid-cols-1
+                sm:grid-cols-2
+                xl:grid-cols-4
+
+                gap-8
+              "
+            >
+              {stats.map((stat, index) => (
                 <div
+                  key={index}
                   className="
-                    absolute
-                    inset-0
+                    relative
 
-                    opacity-0
-                    group-hover:opacity-100
+                    overflow-hidden
 
-                    transition-opacity
-                    duration-700
-
-                    bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]
-                  "
-                />
-
-                {/* MASSIVE GLASS BUBBLE */}
-                <motion.div
-                  className="
-                    absolute
-                    top-[-10%]
-                    right-[-10%]
-
-                    w-36
-                    h-36
-
-                    rounded-full
+                    rounded-3xl
 
                     border
-                    border-white/10
+                    border-[#d4af37]/20
 
-                    bg-white/[0.05]
+                    bg-black/40
 
-                    backdrop-blur-2xl
-                  "
-                  animate={{
-                    y: [0, -20, 0],
-                    x: [0, 12, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.3,
-                  }}
-                />
+                    backdrop-blur-md
 
-                {/* VALUE */}
-                <motion.div
-                  className="
-                    relative
-                    z-10
+                    p-8
 
-                    text-[16vw]
-                    md:text-[5vw]
+                    transition-all
+                    duration-300
 
-                    leading-none
-
-                    font-black
-
-                    tracking-[-0.08em]
-
-                    text-white
-
-                    mb-5
-                  "
-                  animate={{
-                    scale: [1, 1.03, 1],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    delay: index * 0.2,
-                  }}
-                >
-                  {stat.value}
-                </motion.div>
-
-                {/* LABEL */}
-                <h3
-                  className="
-                    relative
-                    z-10
-
-                    text-[13px]
-                    md:text-[15px]
-
-                    uppercase
-
-                    tracking-[0.24em]
-
-                    font-semibold
-
-                    text-white/90
-
-                    mb-5
+                    hover:border-[#d4af37]/50
+                    hover:bg-black/50
                   "
                 >
-                  {stat.label}
-                </h3>
+                  {/* Gold Accent Line */}
 
-                {/* DESCRIPTION */}
-                {stat.description && (
-                  <p
+                  <div
                     className="
-                      relative
-                      z-10
+                      absolute
+                      top-0
+                      left-0
 
-                      text-white/45
+                      w-full
+                      h-[2px]
+
+                      bg-[#d4af37]
+                    "
+                  />
+
+                  {/* Value */}
+
+                  <div
+                    className="
+                      text-[#d4af37]
+
+                      text-6xl
+                      md:text-7xl
+
+                      font-black
+
+                      leading-none
+
+                      mb-6
+                    "
+                  >
+                    {stat.value}
+                  </div>
+
+                  {/* Label */}
+
+                  <h3
+                    className="
+                      uppercase
+
+                      tracking-[0.25em]
 
                       text-sm
 
-                      leading-relaxed
+                      font-semibold
+
+                      mb-4
                     "
                   >
-                    {stat.description}
-                  </p>
-                )}
-              </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </Container>
+                    {stat.label}
+                  </h3>
 
-      {/* BOTTOM SHADE */}
-      <div
-        className="
-          absolute
-          bottom-0
-          left-0
+                  {/* Description */}
 
-          w-full
-          h-40
+                  {stat.description && (
+                    <p
+                      className="
+                        text-white/65
 
-          bg-gradient-to-t
-          from-black
-          to-transparent
+                        text-sm
 
-          pointer-events-none
-        "
-      />
-    </section>
+                        leading-relaxed
+                      "
+                    >
+                      {stat.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+    </VantaBackground>
   );
 }
