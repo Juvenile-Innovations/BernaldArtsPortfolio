@@ -3,49 +3,6 @@
 import React, { useEffect, useRef, ReactNode } from "react";
 import * as THREE from "three";
 
-// @ts-ignore
-import NET from "vanta/dist/vanta.net.min";
-// @ts-ignore
-import WAVES from "vanta/dist/vanta.waves.min";
-// @ts-ignore
-import GLOBE from "vanta/dist/vanta.globe.min";
-// @ts-ignore
-import BIRDS from "vanta/dist/vanta.birds.min";
-// @ts-ignore
-import FOG from "vanta/dist/vanta.fog.min";
-// @ts-ignore
-import HALO from "vanta/dist/vanta.halo.min";
-// @ts-ignore
-import CELLS from "vanta/dist/vanta.cells.min";
-// @ts-ignore
-import TOPOLOGY from "vanta/dist/vanta.topology.min";
-// @ts-ignore
-import DOTS from "vanta/dist/vanta.dots.min";
-// @ts-ignore
-import TRUNK from "vanta/dist/vanta.trunk.min";
-// @ts-ignore
-import RINGS from "vanta/dist/vanta.rings.min";
-// @ts-ignore
-import CLOUDS from "vanta/dist/vanta.clouds.min";
-// @ts-ignore
-import CLOUDS2 from "vanta/dist/vanta.clouds2.min";
-
-const EFFECTS = {
-  net: NET,
-  waves: WAVES,
-  globe: GLOBE,
-  birds: BIRDS,
-  fog: FOG,
-  halo: HALO,
-  cells: CELLS,
-  topology: TOPOLOGY,
-  dots: DOTS,
-  trunk: TRUNK,
-  rings: RINGS,
-  clouds: CLOUDS,
-  clouds2: CLOUDS2,
-};
-
 type VantaEffect =
   | "net"
   | "waves"
@@ -88,61 +45,118 @@ export default function VantaBackground({
   useEffect(() => {
     if (!vantaRef.current) return;
 
-    const Effect = EFFECTS[type];
+    let mounted = true;
 
-    if (!Effect) return;
+    const loadVanta = async () => {
+      let Effect: any = null;
 
-    const commonConfig = {
-      el: vantaRef.current,
-      THREE,
+      try {
+        switch (type) {
+          case "net":
+            Effect = (await import("vanta/dist/vanta.net.min")).default;
+            break;
 
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
+          case "waves":
+            Effect = (await import("vanta/dist/vanta.waves.min")).default;
+            break;
 
-      minHeight: 200,
-      minWidth: 200,
+          case "globe":
+            Effect = (await import("vanta/dist/vanta.globe.min")).default;
+            break;
 
-      scale: 1,
-      scaleMobile: 1,
+          case "birds":
+            Effect = (await import("vanta/dist/vanta.birds.min")).default;
+            break;
+
+          case "fog":
+            Effect = (await import("vanta/dist/vanta.fog.min")).default;
+            break;
+
+          case "halo":
+            Effect = (await import("vanta/dist/vanta.halo.min")).default;
+            break;
+
+          case "cells":
+            Effect = (await import("vanta/dist/vanta.cells.min")).default;
+            break;
+
+          case "topology":
+            Effect = (await import("vanta/dist/vanta.topology.min")).default;
+            break;
+
+          case "dots":
+            Effect = (await import("vanta/dist/vanta.dots.min")).default;
+            break;
+
+          case "trunk":
+            Effect = (await import("vanta/dist/vanta.trunk.min")).default;
+            break;
+
+          case "rings":
+            Effect = (await import("vanta/dist/vanta.rings.min")).default;
+            break;
+
+          case "clouds":
+            Effect = (await import("vanta/dist/vanta.clouds.min")).default;
+            break;
+
+          case "clouds2":
+            Effect = (await import("vanta/dist/vanta.clouds2.min")).default;
+            break;
+        }
+
+        if (!mounted || !Effect || !vantaRef.current) return;
+
+        const commonConfig = {
+          el: vantaRef.current,
+          THREE,
+
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+
+          minHeight: 200,
+          minWidth: 200,
+
+          scale: 1,
+          scaleMobile: 1,
+        };
+
+        if (type === "cells") {
+          effectRef.current = Effect({
+            ...commonConfig,
+            color1,
+            color2,
+            size: 1.4,
+            speed: 1.2,
+          });
+        } else if (type === "waves") {
+          effectRef.current = Effect({
+            ...commonConfig,
+            color,
+            backgroundColor,
+            shininess: 40,
+            waveHeight: 18,
+            waveSpeed: 0.8,
+            zoom: 0.85,
+          });
+        } else {
+          effectRef.current = Effect({
+            ...commonConfig,
+            color,
+            backgroundColor,
+          });
+        }
+      } catch (error) {
+        console.error("Vanta Error:", error);
+      }
     };
 
-    try {
-      if (type === "cells") {
-        effectRef.current = Effect({
-          ...commonConfig,
-
-          color1,
-          color2,
-
-          size: 1.4,
-          speed: 1.2,
-        });
-      } else if (type === "waves") {
-        effectRef.current = Effect({
-          ...commonConfig,
-
-          color,
-          backgroundColor,
-
-          shininess: 40,
-          waveHeight: 18,
-          waveSpeed: 0.8,
-          zoom: 0.85,
-        });
-      } else {
-        effectRef.current = Effect({
-          ...commonConfig,
-
-          color,
-          backgroundColor,
-        });
-      }
-    } catch (error) {
-      console.error("Vanta Error:", error);
-    }
+    loadVanta();
 
     return () => {
+      mounted = false;
+
       if (effectRef.current) {
         effectRef.current.destroy();
         effectRef.current = null;
@@ -158,13 +172,11 @@ export default function VantaBackground({
 
   return (
     <div className="relative w-full">
-      {/* Background */}
       <div
         ref={vantaRef}
         className="absolute inset-0 z-0"
       />
 
-      {/* Content */}
       <div className="relative z-10">
         {children}
       </div>

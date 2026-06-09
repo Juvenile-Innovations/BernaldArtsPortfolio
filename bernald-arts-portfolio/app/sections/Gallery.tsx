@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
-const images = [
+const IMAGES = [
   "/images/gallery/IMG_20230305_144727_290.jpg",
   "/images/gallery/IMG-20240721-WA0040.jpg",
   "/images/gallery/IMG-20240723-WA0048.jpg",
@@ -16,261 +16,136 @@ const images = [
   "/images/gallery/IMG_20260225_100448_730.jpg",
 ];
 
-const row1 = [...images, ...images];
-const row2 = [...images.slice().reverse(), ...images.slice().reverse()];
+// Duplicate for seamless looping
+const ROW_1 = [...IMAGES, ...IMAGES];
+const ROW_2 = [...IMAGES.slice().reverse(), ...IMAGES.slice().reverse()];
+
+// Native CSS gradient for the Black & Gold Caution Tape effect
+const CAUTION_TAPE_STYLE = {
+  backgroundImage: "repeating-linear-gradient(-45deg, #000, #000 20px, #D4AF37 20px, #D4AF37 40px)",
+};
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [selectedImage]);
+
   return (
     <>
-      <section
-        id="gallery"
-        className="
-          relative
-          overflow-hidden
-          bg-white
-          py-24
-        "
-      >
-        {/* Heading */}
-        <div className=" ml-16 mb-16">
-          <p
-            className="
-              uppercase
-              text-5text-white
+      {/* NATIVE CSS ANIMATIONS */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes slide-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes slide-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .marquee-left {
+          animation: slide-left 35s linear infinite;
+        }
+        .marquee-right {
+          animation: slide-right 40s linear infinite;
+        }
+        .marquee-left:hover, .marquee-right:hover {
+          animation-play-state: paused;
+        }
+      `}} />
 
-            text-[15vw]
-            sm:text-[12vw]
-            md:text-[7vw]
-
-            leading-[0.78]
-
-            font-black
-
-            tracking-[-0.09em]
-
-            uppercasexl
-              md:text-5xl
-              font-light
-              text-[#D4AF37]
-            "
-          >
-            Gallery
-          </p>
-
-          <h2
-            className="
-              uppercase
-              tracking-[0.5em]
-              text-[#D4AF37]
-              text-sm
-              mb-3
-            "
-          >
-            Our Works
-          </h2>
-        </div>
-
-        {/* ROW 1 */}
-        <div className="overflow-hidden mb-8">
-          <motion.div
-            className="flex gap-6 w-max"
-            animate={{
-              x: ["0%", "-50%"],
-            }}
-            transition={{
-              duration: 35,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {row1.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedImage(image)}
-                className="
-                  group
-                  relative
-                  cursor-pointer
-                  flex-shrink-0
-
-                  w-[320px]
-                  h-[420px]
-
-                  overflow-hidden
-                  rounded-xl
-
-                  border
-                  border-[#D4AF37]/40
-
-                  bg-white
-                "
-              >
-                <img
-                  src={image}
-                  alt=""
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-
-                    transition-transform
-                    duration-700
-
-                    group-hover:scale-110
-                  "
-                />
-
-                <div
-                  className="
-                    absolute
-                    inset-0
-
-                    border-2
-                    border-transparent
-
-                    group-hover:border-[#D4AF37]
-
-                    transition-all
-                    duration-500
-                  "
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* ROW 2 */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-6 w-max"
-            animate={{
-              x: ["-50%", "0%"],
-            }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {row2.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedImage(image)}
-                className="
-                  group
-                  relative
-                  cursor-pointer
-                  flex-shrink-0
-
-                  w-[320px]
-                  h-[420px]
-
-                  overflow-hidden
-                  rounded-xl
-
-                  border
-                  border-[#D4AF37]/40
-
-                  bg-white
-                "
-              >
-                <img
-                  src={image}
-                  alt=""
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-
-                    transition-transform
-                    duration-700
-
-                    group-hover:scale-110
-                  "
-                />
-
-                <div
-                  className="
-                    absolute
-                    inset-0
-
-                    border-2
-                    border-transparent
-
-                    group-hover:border-[#D4AF37]
-
-                    transition-all
-                    duration-500
-                  "
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Decorative Gold Lines */}
-        <div
-          className="
-            absolute
-            top-0
-            left-0
-            w-full
-            h-px
-            bg-[#D4AF37]/30
-          "
+      <section id="gallery" className="relative bg-white pt-5 pb-5 overflow-hidden">
+        
+        {/* TOP CAUTION TAPE BORDER */}
+        <div 
+          className="absolute top-0 left-0 w-full h-4 md:h-6 z-10 shadow-md border-b-2 border-black"
+          style={CAUTION_TAPE_STYLE} 
         />
 
-        <div
-          className="
-            absolute
-            bottom-0
-            left-0
-            w-full
-            h-px
-            bg-[#D4AF37]/30
-          "
+        <div className="py-20 md:py-24">
+          {/* ROW 1 (Moves Left) */}
+          <div className="overflow-hidden mb-6 md:mb-8">
+            <div className="flex gap-4 md:gap-6 w-[max-content] marquee-left">
+              {ROW_1.map((image, index) => (
+                <div
+                  key={`r1-${index}`}
+                  onClick={() => setSelectedImage(image)}
+                  className="group relative cursor-pointer flex-shrink-0 w-[240px] h-[320px] md:w-[320px] md:h-[420px] overflow-hidden bg-black/5"
+                >
+                  <Image
+                    src={image}
+                    alt={`Gallery Image ${index}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 border-[2px] border-[black]"
+                    sizes="(max-width: 768px) 240px, 320px"
+                  />
+                  {/* Hover Frame */}
+                  <div className="absolute inset-0 border-[3px] border-transparent group-hover:border-[#D4AF37] transition-colors duration-300 pointer-events-none" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ROW 2 (Moves Right) */}
+          <div className="overflow-hidden">
+            <div className="flex gap-4 md:gap-6 w-[max-content] marquee-right">
+              {ROW_2.map((image, index) => (
+                <div
+                  key={`r2-${index}`}
+                  onClick={() => setSelectedImage(image)}
+                  className="group relative cursor-pointer flex-shrink-0 w-[240px] h-[320px] md:w-[320px] md:h-[420px] overflow-hidden bg-black/5"
+                >
+                  <Image
+                    src={image}
+                    alt={`Gallery Image ${index}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 border-[2px] border-[black]"
+                    sizes="(max-width: 768px) 240px, 320px"
+                  />
+                  {/* Hover Frame */}
+                  <div className="absolute inset-0 border-[3px] border-transparent group-hover:border-[#D4AF37] transition-colors duration-300 pointer-events-none" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM CAUTION TAPE BORDER */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-4 md:h-6 z-10 shadow-md border-t-2 border-black"
+          style={CAUTION_TAPE_STYLE} 
         />
+
       </section>
 
-      {/* Fullscreen Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            className="
-              fixed
-              inset-0
-              z-[9999]
-
-              bg-black/95
-
-              flex
-              items-center
-              justify-center
-
-              cursor-pointer
-            "
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.img
+      {/* FULLSCREEN MODAL */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center cursor-pointer p-4 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button className="absolute top-6 right-8 text-white/50 hover:text-white uppercase tracking-widest text-xs font-bold transition-colors">
+            Close [X]
+          </button>
+          
+          <div className="relative w-full max-w-5xl h-[85vh]">
+            <Image
               src={selectedImage}
-              alt=""
-              className="
-                max-w-[90vw]
-                max-h-[90vh]
-                object-contain
-              "
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
+              alt="Fullscreen view"
+              fill
+              className="object-contain"
+              priority
             />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </>
   );
 }
