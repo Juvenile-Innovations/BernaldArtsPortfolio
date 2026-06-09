@@ -17,7 +17,8 @@ const services = [
 • Premium paints
 • Weather resistant coating
 • Indoor & outdoor projects`,
-    image: "/images/about/1.jpg",
+    image: "/images/services/wall-art.gif", // GIF
+    isGif: true,
   },
   {
     id: "02",
@@ -30,7 +31,8 @@ const services = [
 • Custom portrait commissions
 • Museum-grade paper
 • Framing available`,
-    image: "/images/services/pencil-art.jpg",
+    image: "/images/services/pencil-art.gif",
+    isGif: true,
   },
   {
     id: "03",
@@ -43,7 +45,8 @@ const services = [
 • Lightfast pigments
 • Detailed illustrative style
 • Custom sizes available`,
-    image: "/images/services/colour-pencil.jpg",
+    image: "/images/services/colour-pencil.gif",
+    isGif: true,
   },
   {
     id: "04",
@@ -56,7 +59,8 @@ const services = [
 • High-quality acrylics
 • Abstract & figurative styles
 • Varnished for protection`,
-    image: "/images/services/acrylic.jpg",
+    image: "/images/services/acrylic.gif",
+    isGif: true,
   },
   {
     id: "05",
@@ -69,7 +73,8 @@ const services = [
 • Professional oil paints
 • Classical techniques
 • Ready to hang`,
-    image: "/images/services/oil.jpg",
+    image: "/images/services/oil.gif",
+    isGif: true,
   },
   {
     id: "06",
@@ -82,7 +87,8 @@ const services = [
 • Lightfast watercolors
 • Botanical & landscape themes
 • Protected with UV fixative`,
-    image: "/images/services/watercolor.jpg",
+    image: "/images/services/watercolor.gif",
+    isGif: true,
   },
   {
     id: "07",
@@ -95,12 +101,54 @@ const services = [
 • Deep red and monochrome palette
 • Experimental techniques
 • Sealed with protective coating`,
-    image: "/images/services/blood-art.jpg",
+    image: "/images/services/blood-art.gif",
+    isGif: true,
   },
 ];
 
+// Optimized image component – uses Next.js Image for static, unoptimized for GIFs
+function OptimizedImage({
+  src,
+  alt,
+  fill,
+  className,
+}: {
+  src: string;
+  alt: string;
+  fill?: boolean;
+  className?: string;
+}) {
+  const isGif = src.toLowerCase().endsWith(".gif");
+
+  if (isGif) {
+    // GIFs: use standard img tag to preserve animation
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        loading="lazy"
+        style={fill ? { objectFit: "cover", width: "100%", height: "100%" } : undefined}
+      />
+    );
+  }
+
+  // Static images: use Next.js Image with optimization
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill={fill}
+      className={className}
+      sizes="(max-width: 768px) 100vw, 50vw"
+      quality={85}
+      loading="lazy"
+    />
+  );
+}
+
 // Card wrapper with parallax image
-function ParallaxCard({ service }: { service: (typeof services)[0] }) {
+function ParallaxCard({ service, index }: { service: (typeof services)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
 
@@ -112,6 +160,9 @@ function ParallaxCard({ service }: { service: (typeof services)[0] }) {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
 
+  // Priority for first 2 cards (above the fold)
+  const priority = index < 2;
+
   return (
     <div ref={ref}>
       {/* Mobile Layout */}
@@ -121,7 +172,7 @@ function ParallaxCard({ service }: { service: (typeof services)[0] }) {
             className="relative w-full h-full"
             style={{ scale: imageScale, y: imageY }}
           >
-            <Image
+            <OptimizedImage
               src={service.image}
               alt={service.title}
               fill
@@ -129,7 +180,7 @@ function ParallaxCard({ service }: { service: (typeof services)[0] }) {
             />
           </motion.div>
         </div>
-        <div className="p-6">
+        <div className="p-6 ">
           <p className="text-white/40 text-[10px] uppercase tracking-[0.45em] mb-3">
             {service.id}
           </p>
@@ -169,7 +220,7 @@ function ParallaxCard({ service }: { service: (typeof services)[0] }) {
             className="relative w-full h-full"
             style={{ scale: imageScale, y: imageY }}
           >
-            <Image
+            <OptimizedImage
               src={service.image}
               alt={service.title}
               fill
@@ -179,14 +230,14 @@ function ParallaxCard({ service }: { service: (typeof services)[0] }) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none" />
         </div>
 
-        <div className="w-1/2 p-8 lg:p-12 flex flex-col justify-center">
-          <p className="text-white/40 text-[11px] uppercase tracking-[0.45em] mb-4">
+        <div className="w-1/2 p-8 lg:p-12 flex flex-col bg-white  justify-center">
+          <p className="text-black/40 text-[11px] uppercase tracking-[0.45em] mb-4">
             {service.id}
           </p>
-          <h2 className="text-white text-4xl lg:text-5xl font-black tracking-[-0.02em] uppercase mb-6">
+          <h2 className="text-black text-4xl lg:text-5xl font-black tracking-[-0.02em] uppercase mb-6">
             {service.title}
           </h2>
-          <div className="text-white/70 leading-relaxed whitespace-pre-line mb-8">
+          <div className="text-black/70 leading-relaxed whitespace-pre-line mb-8">
             {service.fullDescription}
           </div>
           <button className="px-6 py-3 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all w-fit">
@@ -202,7 +253,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-transparent px-4 md:px-8 py-24 md:py-32"
+      className="relative overflow-hidden  px-4 md:px-8 py-24 md:py-32"
     >
       <div className="mb-16 md:mb-24">
         <p className="text-white/35 uppercase tracking-[0.45em] text-[10px] md:text-[11px] mb-6">
@@ -216,17 +267,17 @@ export default function Services() {
       </div>
 
       <div className="flex flex-col gap-12 md:gap-16">
-        {services.map((service) => (
+        {services.map((service, index) => (
           <div
             key={service.id}
             className="
               w-full overflow-hidden
-              border border-[#d4af37]   /* solid golden border */
+              border border-[#d4af37]
               bg-white/[0.05] backdrop-blur-2xl
               rounded-2xl
             "
           >
-            <ParallaxCard service={service} />
+            <ParallaxCard service={service} index={index} />
           </div>
         ))}
       </div>
