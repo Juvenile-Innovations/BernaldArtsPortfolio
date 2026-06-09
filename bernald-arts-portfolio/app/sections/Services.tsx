@@ -17,8 +17,8 @@ const services = [
 • Premium paints
 • Weather resistant coating
 • Indoor & outdoor projects`,
-    image: "/images/services/wall-art.gif", // GIF
-    isGif: true,
+    image: "/images/services/wall-art.webm", // GIF
+    isVideo: true,
   },
   {
     id: "02",
@@ -31,8 +31,8 @@ const services = [
 • Custom portrait commissions
 • Museum-grade paper
 • Framing available`,
-    image: "/images/services/pencil-art.gif",
-    isGif: true,
+    image: "/videos/services/pencil-art.webm",
+    isVideo: true,
   },
   {
     id: "03",
@@ -101,13 +101,13 @@ const services = [
 • Deep red and monochrome palette
 • Experimental techniques
 • Sealed with protective coating`,
-    image: "/images/services/blood-art.gif",
-    isGif: true,
+    image: "/videos/services/blood-art.webm",
+    isVideo: true,
   },
 ];
 
 // Optimized image component – uses Next.js Image for static, unoptimized for GIFs
-function OptimizedImage({
+function Media({
   src,
   alt,
   fill,
@@ -118,18 +118,30 @@ function OptimizedImage({
   fill?: boolean;
   className?: string;
 }) {
-  const isGif = src.toLowerCase().endsWith(".gif");
+  const isVideo = src.endsWith(".webm");
 
-  if (isGif) {
+  if (isVideo) {
     // GIFs: use standard img tag to preserve animation
     return (
-      <img
-        src={src}
-        alt={alt}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
         className={className}
-        loading="lazy"
-        style={fill ? { objectFit: "cover", width: "100%", height: "100%" } : undefined}
-      />
+        style={
+          fill
+            ? {
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }
+            : undefined
+        }
+      >
+        <source src={src} type="video/webm" />
+      </video>
     );
   }
 
@@ -172,7 +184,7 @@ function ParallaxCard({ service, index }: { service: (typeof services)[0]; index
             className="relative w-full h-full"
             style={{ scale: imageScale, y: imageY }}
           >
-            <OptimizedImage
+            <Media
               src={service.image}
               alt={service.title}
               fill
@@ -220,7 +232,7 @@ function ParallaxCard({ service, index }: { service: (typeof services)[0]; index
             className="relative w-full h-full"
             style={{ scale: imageScale, y: imageY }}
           >
-            <OptimizedImage
+            <Media
               src={service.image}
               alt={service.title}
               fill
