@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://bernaldarts.com",
+    url: "https://bernald.art",
     title: "Bernald Arts | Multi-Surface Mixed-Media Artist",
     description: "Creating timeless artwork through imagination, craftsmanship, and visual storytelling.",
     siteName: "Bernald Arts",
@@ -91,9 +91,9 @@ export const metadata: Metadata = {
   
   // Defines browser tab icons and iOS home screen icons
   icons: {
-    icon: "/favicon_io/favicon.ico",
-    shortcut: "/BernaldArtsLogo.ico",
-    apple: "/favicon_io/apple-touch-icon.png", // Recommended: Create a 180x180 png for iOS
+    icon: "/favicon.ico",       // Use the primary favicon
+    shortcut: "/favicon.ico",   // Point to the same file for compatibility
+    apple: "/apple-touch-icon.png", 
   },
 };
 
