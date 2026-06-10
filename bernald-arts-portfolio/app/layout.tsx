@@ -23,11 +23,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // MUST UPDATE: Replace with your actual production domain
   metadataBase: new URL("https://www.bernald.art/"),
   
   title: {
-    default: "Bernald Arts | Fine Art Studio & Murals",
+    default: "Bernald Arts | Multi-Surface Mixed-Media Artist",
     template: "%s | Bernald Arts",
   },
   description:
@@ -69,12 +68,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://bernaldarts.com",
-    title: "Bernald Arts | Fine Art Studio & Murals",
+    title: "Bernald Arts | Multi-Surface Mixed-Media Artist",
     description: "Creating timeless artwork through imagination, craftsmanship, and visual storytelling.",
     siteName: "Bernald Arts",
     images: [
       {
-        url: "/images/contact-bg.jpg", // Acts as the default share image
+        url: "/images/share_image.png", // Acts as the default share image
         width: 1200,
         height: 630,
         alt: "Bernald Arts Portfolio",
@@ -85,16 +84,16 @@ export const metadata: Metadata = {
   // Twitter Card: Controls how links look on X (Twitter)
   twitter: {
     card: "summary_large_image",
-    title: "Bernald Arts | Fine Art Studio",
+    title: "Bernald Arts | Multi-Surface Mixed-Media Artist",
     description: "Creating timeless artwork through imagination, craftsmanship, and visual storytelling.",
-    images: ["/images/contact-bg.jpg"],
+    images: ["/images/share_image.png"],
   },
   
   // Defines browser tab icons and iOS home screen icons
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png", // Recommended: Create a 180x180 png for iOS
+    icon: "/favicon_io/favicon.ico",
+    shortcut: "/BernaldArtsLogo.ico",
+    apple: "/favicon_io/apple-touch-icon.png", // Recommended: Create a 180x180 png for iOS
   },
 };
 
