@@ -91,9 +91,9 @@ export const metadata: Metadata = {
   
   // Defines browser tab icons and iOS home screen icons
   icons: {
-    icon: "/favicon.ico",       // Use the primary favicon
-    shortcut: "/favicon.ico",   // Point to the same file for compatibility
-    apple: "/apple-touch-icon.png", 
+    icon: "/favicon_io/favicon.ico",       // Use the primary favicon
+    shortcut: "/favicon_io/favicon.ico",   // Point to the same file for compatibility
+    apple: "/favicon_io/apple-touch-icon.png", 
   },
 };
 
