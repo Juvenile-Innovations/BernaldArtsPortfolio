@@ -1,14 +1,18 @@
 import Container from "./Container";
 
 const NAV_LINKS = ["About", "Services", "Gallery", "Contact"];
-const SOCIAL_LINKS = ["Instagram", "Facebook", "WhatsApp"];
+
+const SOCIAL_LINKS = [
+  { name: "Instagram", url: "https://www.instagram.com/bernald_george_official/" },
+  { name: "Facebook", url: "#" },
+  { name: "WhatsApp", url: "https://wa.me/919047576773" },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer
-      // Added 'bg-fixed' here for the CSS-only parallax effect
       className="relative overflow-hidden py-20 bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: "url('/images/footer-bg.jpg')" }}
     >
@@ -40,6 +44,7 @@ export default function Footer() {
 
           {/* MIDDLE SECTION */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
             {/* Navigation */}
             <div>
               <h3 className="text-[#b8862d] uppercase tracking-[0.3em] text-xs mb-6">
@@ -64,7 +69,7 @@ export default function Footer() {
                 Contact
               </h3>
               <div className="space-y-3 text-black/70">
-                <p>hello@bernaldarts.com</p>
+                <p>bernaldgeorge90475@gmail.com</p>
                 <p>+91 90475 76773</p>
                 <p>Tamil Nadu, India</p>
               </div>
@@ -78,11 +83,13 @@ export default function Footer() {
               <div className="space-y-3">
                 {SOCIAL_LINKS.map((platform) => (
                   <a
-                    key={platform}
-                    href="#"
+                    key={platform.name}
+                    href={platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block text-black/70 hover:text-[#b8862d] transition-colors"
                   >
-                    {platform}
+                    {platform.name}
                   </a>
                 ))}
               </div>

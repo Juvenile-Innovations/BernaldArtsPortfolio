@@ -40,7 +40,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `🎨 *BOOK YOUR ART*\n👤 Name: ${formData.name}\n📞 Mobile: ${formData.mobile}\n📍 Location: ${formData.location}\n🖼️ Type: ${formData.artType}\n📐 Size: ${formData.size} Sq.ft\n📅 Date: ${formData.date}\n📝 Comments: ${formData.comments}`;
+    const message = `*BOOK YOUR ART*\n Name: ${formData.name}\n Mobile: ${formData.mobile}\n Location: ${formData.location}\n Type: ${formData.artType}\n Size: ${formData.size} Sq.ft\n Date: ${formData.date}\n Comments: ${formData.comments}`;
     window.open(`https://wa.me/919047576773?text=${encodeURIComponent(message)}`, "_blank");
   };
 

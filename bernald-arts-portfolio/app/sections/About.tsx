@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { label } from "framer-motion/client";
 
 const STATS = [
-  { number: "08+", label: "Years Experience" },
-  { number: "150+", label: "Projects Crafted" },
-  { number: "100+", label: "Creative Clients" },
+  { number: "10+", label: "Years Experience" },
+  { number: "3x" , label: "World Record Holder"},
+  {number: "1000+" , label: "Projects Completed"}
 ];
 
 const SPECIALIZATIONS = [
@@ -23,6 +24,7 @@ const ARTIST_IMAGES = [
   "/images/about/2.jpg",
   "/images/about/3.jpg",
 ];
+
 
 export default function About() {
   const [currentSpec, setCurrentSpec] = useState(0);
@@ -115,9 +117,7 @@ export default function About() {
             {/* Description */}
             <div className="mt-10 md:mt-20 max-w-2xl space-y-6 md:space-y-10">
               <p className="text-[18px] md:text-[32px] leading-[1.5] text-black/85 font-light">
-                Bernald creates emotionally immersive visual experiences
-                through cinematic composition, mixed media experimentation,
-                and large-scale artistic storytelling.
+              "Hi, I am Bernald George Raj J. As a Multi-Surface Artist, I bridge the gap between traditional techniques and modern digital narratives. My work explores how art interacts with its environment; whether it’s on paper, canvas, or unconventional everyday objects, I bring surfaces to life. I combine mixed media, graffiti, and digital design to ensure that every project I touch is not just a painting, but a bespoke experience tailored to its medium."
               </p>
               <p className="text-black/60 text-base md:text-lg leading-relaxed max-w-xl">
                 Blending physical textures, spatial narratives, mural work,
