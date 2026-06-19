@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Patrick_Hand } from "next/font/google";
 
 const patrickHand = Patrick_Hand({
@@ -139,7 +139,7 @@ export default function Gallery() {
   };
 
   // Framer Motion Variants for Staggered Entrance
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -149,7 +149,7 @@ export default function Gallery() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 40, opacity: 0 },
     show: {
       y: 0,
