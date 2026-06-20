@@ -103,8 +103,8 @@ export default function About() {
       className="relative min-h-screen overflow-hidden scroll-mb-0 text-black py-24 md:py-36 parallax-container"
       style={{ background: 'linear-gradient(to top, #f4f4f4ff, #aebce8ff)' }}
     >
-      <div 
-        className="absolute inset-0 z-0 pointer-events-none" 
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
           backgroundColor: '#E5E5F7',
           opacity: 0.2,
@@ -139,7 +139,7 @@ export default function About() {
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-12">
         <div className="flex items-center gap-4 mb-16 md:mb-24">
           <div className="w-12 h-px bg-sky-400" />
-          <p className="text-[12px] md:text-[14px] uppercase tracking-[0.25em] text-sky-600 font-bold sans-serif">
+          <p className="text-[12px] md:text-[14px] uppercase tracking-[0.25em] text-sky-400 font-bold sans-serif">
             Know About Me
           </p>
         </div>
