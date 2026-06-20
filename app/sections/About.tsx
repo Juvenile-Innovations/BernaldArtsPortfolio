@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, animate } from "framer-motion";
 import { msMadi } from "@/app/lib/fonts";
-
+import StatCounter from "../components/StatCounter";
 const STATS = [
   {
     number: "2000+",
@@ -18,7 +18,8 @@ const STATS = [
         <path d="M14.5 14C14.5 15.5 13 17 11.5 17C10 17 9 15.5 9 14C9 12.5 11 11.5 12 10.5C13 11.5 14.5 12.5 14.5 14Z" fill="currentColor" opacity="0.2" />
       </svg>
     ),
-    color: "from-blue-500/10 to-sky-500/10 text-blue-600 border-blue-200/50"
+    color: "from-blue-500/10 to-sky-500/10 text-blue-600 border-blue-200/50",
+    bgImage: "/images/about/2000project.jpg"
   },
   {
     number: "3x",
@@ -33,7 +34,8 @@ const STATS = [
         <path d="m12 6 .8 1.6 1.8.3-1.3 1.3.3 1.8-1.6-.8-1.6.8.3-1.8-1.3-1.3 1.8-.3L12 6Z" fill="currentColor" />
       </svg>
     ),
-    color: "from-amber-500/10 to-yellow-500/10 text-amber-600 border-amber-200/50"
+    color: "from-amber-500/10 to-yellow-500/10 text-amber-600 border-amber-200/50",
+    bgImage: "/images/about/2.jpg"
   },
   {
     number: "2000+",
@@ -46,7 +48,8 @@ const STATS = [
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    color: "from-emerald-500/10 to-teal-500/10 text-emerald-600 border-emerald-200/50"
+    color: "from-emerald-500/10 to-teal-500/10 text-emerald-600 border-emerald-200/50",
+    bgImage: "/images/about/happycustomer.jpg"
   },
   {
     number: "8+",
@@ -58,7 +61,8 @@ const STATS = [
         <path d="m12 5 1 2 2.5.5-1.75 1.75.5 2.25-2.25-1-2.25 1 .5-2.25L8.5 7.5l2.5-.5L12 5Z" fill="currentColor" />
       </svg>
     ),
-    color: "from-rose-500/10 to-pink-500/10 text-rose-600 border-rose-200/50"
+    color: "from-rose-500/10 to-pink-500/10 text-rose-600 border-rose-200/50",
+    bgImage: "/images/about/1.jpg"
   }
 ];
 
@@ -77,41 +81,6 @@ const ARTIST_IMAGES = [
   "/images/about/3.jpg",
 ];
 
-function StatCounter({ value, duration = 2 }: { value: string; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  useEffect(() => {
-    if (!isInView) return;
-    
-    const numMatch = value.match(/\d+/);
-    if (!numMatch) {
-      if (ref.current) ref.current.textContent = value;
-      return;
-    }
-    
-    const targetValue = parseInt(numMatch[0], 10);
-    const suffix = value.replace(numMatch[0], "");
-    const isPrefix = value.startsWith(suffix) && suffix !== "+";
-    
-    const node = ref.current;
-    if (!node) return;
-
-    const controls = animate(0, targetValue, {
-      duration,
-      ease: [0.16, 1, 0.3, 1], // premium easeOutQuart-like curve
-      onUpdate(val) {
-        const rounded = Math.round(val);
-        node.textContent = isPrefix ? `${suffix}${rounded}` : `${rounded}${suffix}`;
-      },
-    });
-
-    return () => controls.stop();
-  }, [value, isInView, duration]);
-
-  return <span ref={ref}>0</span>;
-}
-
 export default function About() {
   const [currentSpec, setCurrentSpec] = useState(0);
   const [fade, setFade] = useState(true);
@@ -129,13 +98,29 @@ export default function About() {
   }, []);
 
   return (
-    <section 
-      id="about" 
-      className="relative min-h-screen bg-[#fafafa] overflow-hidden scroll-mb-0 text-black py-24 md:py-36"
+    <section
+      id="about"
+      className="relative min-h-screen overflow-hidden scroll-mb-0 text-black py-24 md:py-36 parallax-container"
+      style={{ background: 'linear-gradient(to top, #f4f4f4ff, #aebce8ff)' }}
     >
-      
-      {/* BULLETPROOF CAROUSEL ANIMATION */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none" 
+        style={{
+          backgroundColor: '#E5E5F7',
+          opacity: 0.2,
+          backgroundImage: 'repeating-radial-gradient( circle at 0 0, transparent 0, #E5E5F7 40px ), repeating-linear-gradient( #444CF755, #444CF7 )',
+          maskImage: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 75%)',
+          maskSize: '100% 100%',
+          WebkitMaskSize: '100% 100%',
+          maskRepeat: 'no-repeat',
+          WebkitMaskRepeat: 'no-repeat'
+        }}
+      />
+      <div className="parallax-grid" />
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes infinite-slide {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -148,43 +133,27 @@ export default function About() {
         }
       `}} />
 
-      {/* AMBIENT BLUE SHADE BACKGROUNDS */}
       <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none z-0 mix-blend-multiply" />
       <div className="absolute bottom-1/4 -right-32 w-[800px] h-[800px] rounded-full bg-sky-100/50 blur-[150px] pointer-events-none z-0 mix-blend-multiply" />
 
-      {/* BACKGROUND GRAPHIC LINES */}
-      <div className="absolute top-0 left-1/4 h-full w-px bg-black/[0.03] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 h-full w-px bg-black/[0.03] pointer-events-none" />
-      <div className="absolute top-0 left-3/4 h-full w-px bg-black/[0.03] pointer-events-none" />
-
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-12">
-        
-        {/* SUB-HEADER LABEL */}
         <div className="flex items-center gap-4 mb-16 md:mb-24">
           <div className="w-12 h-px bg-sky-400" />
           <p className="text-[12px] md:text-[14px] uppercase tracking-[0.25em] text-sky-600 font-bold sans-serif">
-            THE STUDIO PROFILED
+            Know About Me
           </p>
         </div>
 
-        {/* MAIN LAYOUT SPLIT */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-20 items-center">
-          
-          {/* LEFT AREA: TYPOGRAPHY PROFILE & BIO DESCRIPTION */}
           <div className="xl:col-span-6 space-y-8 md:space-y-12">
-            
-            {/* SOPHISTICATED REPLACEMENT FOR THE REMOVED BIG TEXT */}
             <div className="space-y-2">
               <h3 className="text-3xl md:text-5xl text-black font-black uppercase tracking-tight">
                 Bernald George Raj J
               </h3>
-              
-              {/* CURRENT ACTIVE SPECIALIZATION FIELD */}
               <div className="h-12 flex items-center">
                 <p
-                  className={`text-[13px] md:text-[16px] uppercase tracking-[0.3em] bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent font-bold transition-opacity duration-300 ease-in-out ${
-                    fade ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`text-[13px] md:text-[16px] uppercase tracking-[0.3em] bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent font-bold transition-opacity duration-300 ease-in-out ${fade ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   {SPECIALIZATIONS[currentSpec]}
                 </p>
@@ -192,14 +161,13 @@ export default function About() {
               <div className="w-full h-px bg-gradient-to-r from-black/10 via-transparent to-transparent mt-2" />
             </div>
 
-            {/* ARTIST PORTFOLIO STATEMENT - CUSTOM FONT APPLIED TO THE WORDS */}
             <div className="space-y-6 md:space-y-8">
-              <p 
+              <p
                 className={`${msMadi.className} text-[24px] md:text-[34px] leading-[1.4] text-black/90 font-normal max-w-2xl`}
               >
                 "As a Multi-Surface Artist, I bridge the gap between traditional techniques and modern digital narratives. My work explores how art interacts with its environment; whether it’s on paper, canvas, or unconventional everyday objects, I bring surfaces to life."
               </p>
-              <p 
+              <p
                 className="text-black/70 text-lg md:text-2xl leading-relaxed max-w-xl font-normal"
                 style={{ fontFamily: "var(--font-patrick-hand), cursive" }}
               >
@@ -208,9 +176,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* RIGHT AREA: CLEAN VIBRANT IMAGE SLIDER CAROUSEL */}
           <div className="xl:col-span-6 relative h-[450px] md:h-[600px] w-full overflow-hidden rounded-2xl border border-black/5 bg-black/[0.02] shadow-2xl">
-            
             <div className="flex h-full w-[max-content] auto-scroll-carousel">
               {[...ARTIST_IMAGES, ...ARTIST_IMAGES].map((src, index) => (
                 <div
@@ -229,14 +195,12 @@ export default function About() {
               ))}
             </div>
 
-            {/* SMOOTH SURFACE LAYERING VIGNETTES */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none" />
             <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/40 to-transparent pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/40 to-transparent pointer-events-none" />
 
-            {/* FLOATING CORNER CREDIT - CUSTOM FONT APPLIED */}
             <div className="absolute bottom-6 left-8 z-10">
-              <p 
+              <p
                 className="text-white/95 text-xl md:text-3xl tracking-wider font-normal drop-shadow-md"
                 style={{ fontFamily: "var(--font-patrick-hand), cursive" }}
               >
@@ -244,36 +208,49 @@ export default function About() {
               </p>
             </div>
           </div>
-
         </div>
 
-        {/* METRIC DISPLAY COUNT BOUNDS - PREMIUM CARDS WITH SCROLL-COUNT ANIMATION */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mt-24 md:mt-36 ">
           {STATS.map((stat) => (
             <motion.div
               key={stat.label}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative p-6 rounded-2xl bg-white border border-black/[1.04] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-black/[0.08] transition-all duration-300 flex flex-col items-start gap-4"
+              className="relative p-6 rounded-2xl bg-white border-2 border-black shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col items-start gap-4 overflow-hidden"
             >
-              <div className={`p-3.5 rounded-xl bg-gradient-to-br ${stat.color} border flex items-center justify-center`}>
-                {stat.icon}
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-black drop-shadow-sm flex items-center">
-                  <StatCounter value={stat.number} />
-                </h3>
-                <p 
-                  className="text-lg md:text-2xl text-sky-600 font-normal tracking-wide"
-                  style={{ fontFamily: "var(--font-patrick-hand), cursive" }}
+              {stat.bgImage && (
+                <div
+                  className="absolute inset-0 z-0 opacity-[0.4] select-none pointer-events-none"
                 >
-                  {stat.label}
-                </p>
+                  <Image
+                    src={stat.bgImage}
+                    alt={stat.label}
+                    fill
+                    className="object-cover filter"
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                  />
+                </div>
+              )}
+
+              <div className="relative z-10 w-full flex flex-col items-start gap-4">
+                <div className={`p-3.5 rounded-xl bg-gradient-to-br ${stat.color} border flex items-center justify-center`}>
+                  {stat.icon}
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-black drop-shadow-sm flex items-center">
+                    <StatCounter value={stat.number} />
+                  </h3>
+                  <p
+                    className="text-lg md:text-2xl text-sky-600 font-normal tracking-wide"
+                    style={{ fontFamily: "var(--font-patrick-hand), cursive" }}
+                  >
+                    {stat.label}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -19,7 +19,7 @@ const SERVICES_DATA = [
       "Advanced UV-resistant pigments.",
       "Structural site analysis.",
     ],
-    images: ["/images/gallery/image01.jpg", "/images/gallery/image02.jpg", "/images/gallery/image03.jpg", "/images/gallery/image01.jpg"],
+    images: ["/images/services/wall_art_5.jpg", "/images/services/wall_art_4.jpg", "/images/services/wall_art_3.jpg", "/images/services/wall_art_1.jpg"],
   },
   {
     id: "02",
@@ -34,7 +34,7 @@ const SERVICES_DATA = [
       "Human emotion psycho-analysis.",
       "Long-term conservation sealing.",
     ],
-    images: ["/images/gallery/image01.jpg", "/images/gallery/image02.jpg", "/images/gallery/image03.jpg", "/images/gallery/image05.jpg"],
+    images: ["/images/services/pencil_art_1.jpg", "/images/services/pencil_art_2.png", "/images/services/pencil_art_5.png", "/images/services/pencil_art_4.png"],
   },
   {
     id: "03",
@@ -64,7 +64,7 @@ const SERVICES_DATA = [
       "Structural centerpiece stability.",
       "Gallery-ready ambient light tuning.",
     ],
-    images: ["/images/gallery/image01.jpg", "/images/gallery/image02.jpg", "/images/gallery/image03.jpg", "/images/gallery/image01.jpg"],
+    images: ["/images/services/acrylic_art_1.png", "/images/services/acrylic_art_2.png", "/images/services/acrylic_art_3.png", "/images/services/acrylic_art_4.png"],
   },
   {
     id: "05",
@@ -109,7 +109,7 @@ const SERVICES_DATA = [
       "Experimental structural integrity.",
       "Statement installation physics.",
     ],
-    images: ["/images/gallery/image01.jpg", "/images/gallery/image02.jpg", "/images/gallery/image03.jpg", "/images/gallery/image01.jpg"],
+    images: ["/images/services/blood_art_1.png", "/images/services/blood_art_3.jpg", "/images/services/blood_art_4.png", "/images/services/blood_art_2.png"],
   },
 ];
 
@@ -153,9 +153,9 @@ function ServiceSection({ service, index }: { service: typeof SERVICES_DATA[0]; 
   const yImageSlow = useTransform(scrollYProgress, [0, 1], [30, -50]);
 
   return (
-    <div 
+    <div
       id={`service-${service.id}`}
-      ref={sectionRef} 
+      ref={sectionRef}
       className="relative w-full py-16 md:py-32 border-b border-black/5 last:border-0 z-10 scroll-mt-24 md:scroll-mt-28"
     >
       <div className={`relative z-10 flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 md:gap-16 xl:gap-20 items-stretch`}>
@@ -171,8 +171,8 @@ function ServiceSection({ service, index }: { service: typeof SERVICES_DATA[0]; 
               ))}
             </ol>
             <div className="pt-4 lg:pt-6">
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent("select-art-type", { detail: service.title }));
                 }}
