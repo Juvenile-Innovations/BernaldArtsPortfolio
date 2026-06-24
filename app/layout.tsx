@@ -100,6 +100,11 @@ export default function RootLayout({
       className="scroll-smooth"
       suppressHydrationWarning
     >
+      <head>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Honk:MORF@15&display=swap');
+        `}</style>
+      </head>
       <body
         className={`${poppins.className} min-h-screen flex flex-col antialiased bg-black text-white selection:bg-[#d4af37] selection:text-black`}
       >

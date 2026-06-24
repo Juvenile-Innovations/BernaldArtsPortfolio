@@ -1,0 +1,524 @@
+@import url("https://api.fontshare.com/v2/css?f[]=archivo@100,200,300,400,500,600,700,800,900&f[]=clash-display@200,300,400,500,600,700&display=swap");
+
+/* ------------------------------------------------ */
+/* ------------ GALLERY SECTION SCOPE ------------- */
+/* ------------------------------------------------ */
+
+.gallery-section {
+    position: relative;
+    width: 100%;
+    min-height: 130vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #050810;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
+/* Top black fade blend */
+.gallery-section::before,
+.gallery-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 22%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.gallery-section::before {
+    top: 0;
+    background: linear-gradient(
+        to bottom,
+        #0a0a0a 0%,
+        rgba(10, 10, 10, 0.7) 40%,
+        transparent 100%
+    );
+}
+
+.gallery-section::after {
+    bottom: 0;
+    background: linear-gradient(
+        to top,
+        #0a0a0a 0%,
+        rgba(10, 10, 10, 0.7) 40%,
+        transparent 100%
+    );
+}
+
+/* Blurred background — absolutely positioned inside .gallery-section */
+.slide__bg {
+    position: absolute;
+    inset: -12%;
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center center;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    /* Blur the actual image, not the content behind it */
+    filter: blur(16px) saturate(1.2) brightness(0.55);
+    transition: opacity 900ms ease, transform 900ms ease;
+    will-change: opacity, transform;
+}
+
+/* Subtle dark vignette on top of the blurred image */
+.slide__bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.slide__bg[data-current] {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slide__bg[data-previous] {
+    opacity: 0;
+    transform: translateX(-6%);
+}
+
+.slide__bg[data-next] {
+    opacity: 0;
+    transform: translateX(6%);
+}
+
+/* ------------------------------------------------ */
+/* -------------------- SLIDER -------------------- */
+/* ------------------------------------------------ */
+
+:root {
+    --slide-width: min(26vw, 320px);
+    --slide-aspect: 2 / 3;
+    --slide-transition-duration: 750ms;
+    --slide-transition-easing: cubic-bezier(0.76, 0, 0.24, 1);
+    --font-archivo: "Archivo", sans-serif;
+    --font-clash-display: "Clash Display", sans-serif;
+}
+
+.slider {
+    position: relative;
+    z-index: 2;
+    width: calc(3 * var(--slide-width) + 120px);
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.slider--btn {
+    --size: 44px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    opacity: 0.55;
+    transition: opacity 250ms ease, transform 200ms ease;
+    z-index: 10;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.slider--btn svg {
+    width: var(--size);
+    height: var(--size);
+    stroke: white;
+}
+
+.slider--btn:hover {
+    opacity: 1;
+    transform: scale(1.12);
+}
+
+.slides__wrapper {
+    flex: 1;
+    height: calc(var(--slide-width) * 1.5);
+    display: grid;
+    place-items: center;
+}
+
+.slides__wrapper>* {
+    grid-area: 1 / -1;
+}
+
+.slides,
+.slides--infos {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+}
+
+.slides>*,
+.slides--infos>* {
+    grid-area: 1 / -1;
+}
+
+/* ------------------------------------------------ */
+/* -------------------- SLIDE --------------------- */
+/* ------------------------------------------------ */
+
+.slide {
+    --slide-tx: 0px;
+    --slide-ty: 0vh;
+    --slide-scale: 1;
+    --slide-tz: 0px;
+    --slide-rotY: 0deg;
+
+    width: var(--slide-width);
+    height: auto;
+    aspect-ratio: var(--slide-aspect);
+    user-select: none;
+    perspective: 800px;
+
+    transform: perspective(1000px) translate3d(var(--slide-tx), var(--slide-ty), var(--slide-tz)) rotateY(var(--slide-rotY)) scale(var(--slide-scale));
+
+    transition:
+        transform var(--slide-transition-duration) var(--slide-transition-easing),
+        opacity var(--slide-transition-duration) var(--slide-transition-easing);
+}
+
+.slide[data-current] {
+    --slide-scale: 1.28;
+    --slide-tz: 0px;
+    --slide-tx: 0px;
+    --slide-rotY: 0deg;
+    pointer-events: auto;
+    opacity: 1;
+    z-index: 3;
+}
+
+.slide[data-next] {
+    --slide-tx: calc(var(--slide-width) * 1.08);
+    --slide-rotY: -42deg;
+    --slide-scale: 0.92;
+    opacity: 0.65;
+    z-index: 2;
+}
+
+.slide[data-previous] {
+    --slide-tx: calc(-1 * var(--slide-width) * 1.08);
+    --slide-rotY: 42deg;
+    --slide-scale: 0.92;
+    opacity: 0.65;
+    z-index: 2;
+}
+
+/* Hide all slides that are not active/prev/next */
+.slide:not([data-current]):not([data-previous]):not([data-next]) {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0) !important;
+}
+
+.slide:not([data-current]) {
+    pointer-events: none;
+}
+
+.slide[data-current] .slide--image {
+    filter: brightness(0.85);
+}
+
+.slide:not([data-current]) .slide--image {
+    filter: brightness(0.48);
+}
+
+.slide__inner {
+    --rotX: 0deg;
+    --rotY: 0deg;
+    --bgPosX: 0%;
+    --bgPosY: 0%;
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rotX)) rotateY(var(--rotY));
+}
+
+/* ---- Auto 3D rock when slide is active (center) ---- */
+@keyframes autoRock {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    20% {
+        transform: rotateX(4deg) rotateY(-6deg);
+    }
+
+    40% {
+        transform: rotateX(-3deg) rotateY(5deg);
+    }
+
+    60% {
+        transform: rotateX(5deg) rotateY(3deg);
+    }
+
+    80% {
+        transform: rotateX(-2deg) rotateY(-5deg);
+    }
+
+    100% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}
+
+.slide[data-current] .slide__inner {
+    animation: autoRock 5s ease-in-out infinite;
+}
+
+/* Pause rock on mouse interaction so JS tilt takes over */
+.slide[data-current]:hover .slide__inner {
+    animation-play-state: paused;
+}
+
+.slide--image__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    /* 2px gradient border: gold → pink */
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#000, #000) padding-box,
+        linear-gradient(160deg, #d4af37 0%, #c8860a 35%, #ff2d78 100%) border-box;
+    /* Deep black shadow */
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.85),
+        0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.slide--image {
+    width: 110%;
+    height: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    transform: translate(-50%, -50%) translate3d(var(--bgPosX), var(--bgPosY), 0);
+    transition: filter var(--slide-transition-duration) var(--slide-transition-easing);
+    will-change: transform;
+}
+
+/* ------------------------------------------------ */
+/* ---------------- SLIDE INFO -------------------- */
+/* ------------------------------------------------ */
+
+.slide-info {
+    position: relative;
+    width: var(--slide-width);
+    height: 100%;
+    aspect-ratio: var(--slide-aspect);
+    user-select: none;
+    perspective: 800px;
+    z-index: 5;
+    container-type: inline-size;
+}
+
+.slide-info[data-current] .slide-info--text span {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-delay: 280ms;
+}
+
+.slide-info:not([data-current]) .slide-info--text span {
+    opacity: 0;
+    transform: translate3d(0, 110%, 0);
+    transition-delay: 0ms;
+}
+
+/* Hide info panels for slides not in view */
+.slide-info:not([data-current]):not([data-previous]):not([data-next]) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide-info__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rotX, 0deg)) rotateY(var(--rotY, 0deg));
+}
+
+.slide-info--text__wrapper {
+    --z-offset: 45px;
+    position: absolute;
+    height: fit-content;
+    left: -12%;
+    bottom: 14%;
+    transform: translateZ(var(--z-offset));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.slide-info--text {
+    font-family: var(--font-clash-display);
+    color: #fff;
+    overflow: hidden;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.slide-info--text span {
+    display: block;
+    white-space: nowrap;
+    transition:
+        opacity var(--slide-transition-duration) var(--slide-transition-easing),
+        transform var(--slide-transition-duration) var(--slide-transition-easing);
+}
+
+.slide-info--text[data-title],
+.slide-info--text[data-subtitle] {
+    font-size: min(3cqw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: 0.15cqw;
+    text-transform: uppercase;
+}
+
+.slide-info--text[data-subtitle] {
+    margin-left: 2cqw;
+    font-size: min(2.2cqw, 1.8rem);
+    font-weight: 600;
+}
+
+.slide-info--text[data-description] {
+    margin-left: 1cqw;
+    font-size: min(1.5cqw, 0.9rem);
+    font-family: var(--font-archivo);
+    font-weight: 300;
+    opacity: 0.82;
+}
+
+/* ------------------------------------------------ */
+/* -------------- AUTO-SCROLL INDICATOR ----------- */
+/* ------------------------------------------------ */
+
+.gallery-progress {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.gallery-progress__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: background 400ms ease, transform 400ms ease;
+}
+
+.gallery-progress__dot[data-active] {
+    background: #fff;
+    transform: scale(1.4);
+}
+
+
+
+/* ------------------------------------------------ */
+/* ----------- VERTICAL INFINITE MARQUEE ---------- */
+/* ------------------------------------------------ */
+
+/* Outer clipping container — fixed strip on the right */
+.gallery-marquee-vertical {
+    position: absolute;
+    right: 1.5%;
+    top: 0;
+    height: 100%;
+    width: fit-content;
+    min-width: clamp(80px, 10vw, 140px);
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+    /* Fade out at top & bottom edges */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 12%,
+        black 88%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 12%,
+        black 88%,
+        transparent 100%
+    );
+}
+
+/* Scrolling track — two identical sets stacked */
+.gallery-marquee-track {
+    display: flex;
+    flex-direction: column;
+    animation: marquee-scroll-up 30s linear infinite;
+    will-change: transform;
+}
+
+@keyframes marquee-scroll-up {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* One full set of words */
+.gallery-marquee-set {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* "ART" word */
+.gallery-marquee-word {
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "MORF" 15, "SHLN" 50;
+    font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+    text-transform: uppercase;
+    line-height: 1;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0 6px;
+}
+
+/* Separator dot */
+.gallery-marquee-dot {
+    font-size: clamp(0.6rem, 1vw, 0.9rem);
+    opacity: 0.4;
+    display: block;
+    text-align: center;
+    margin: 4px 0;
+    color: #fff;
+}
+
+/* ------------------------------------------------ */
+/* ------------------- RESPONSIVE ----------------- */
+/* ------------------------------------------------ */
+
+@media (max-width: 768px) {
+    :root {
+        --slide-width: min(60vw, 220px);
+    }
+
+    .slider {
+        width: 100%;
+    }
+
+    .gallery-marquee-vertical {
+        display: none;
+    }
+}

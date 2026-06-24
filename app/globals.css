@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700;6..96,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
 :root {
   /* BACKGROUND */
   --background: #030712;
@@ -48,7 +49,8 @@ body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
-  min-height: 100svh; /* Vital for mobile Safari/Chrome */
+  min-height: 100svh;
+  /* Vital for mobile Safari/Chrome */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -65,7 +67,9 @@ body {
   html {
     scroll-behavior: auto;
   }
+
   * {
+    cursor: none;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -94,14 +98,12 @@ body {
 .bernald-title {
   position: relative;
   font-family: 'Syne', sans-serif;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.96) 0%,
-    rgba(255,255,255,0.82) 18%,
-    rgba(226,196,205,0.92) 42%,
-    rgba(188,170,255,0.82) 72%,
-    rgba(255,255,255,0.18) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.82) 18%,
+      rgba(226, 196, 205, 0.92) 42%,
+      rgba(188, 170, 255, 0.82) 72%,
+      rgba(255, 255, 255, 0.18) 100%);
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
@@ -110,14 +112,21 @@ body {
   will-change: transform, opacity;
   letter-spacing: -0.09em;
   filter: saturate(1.04) contrast(1.02);
-  line-height: 1.1; /* Prevents descender clipping */
-  padding-bottom: 0.1em; /* Gives room for the bottom of the letters */
+  line-height: 1.1;
+  /* Prevents descender clipping */
+  padding-bottom: 0.1em;
+  /* Gives room for the bottom of the letters */
 }
 
 /* LIGHT SWEEP ANIMATION */
 @keyframes lightSweep {
-  0% { left: -120%; }
-  100% { left: 160%; }
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 160%;
+  }
 }
 
 
@@ -130,4 +139,129 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+
+.spotlight {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: black;
+  overflow: hidden;
+}
+
+.spotlight-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 1500px;
+  transform: translate(-50%, -50%);
+}
+
+.spotlight-panels {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.spotlight-panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  will-change: left, width;
+}
+
+.spotlight-panel img {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.spotlight-focus-indicator {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border: 3px solid white;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  will-change: left, width;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.spotlight-focus-indicator::before,
+.spotlight-focus-indicator::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: #fff;
+}
+
+.spotlight-focus-indicator::before {
+  bottom: 100%;
+  height: 100svh;
+}
+
+.spotlight-focus-indicator::after {
+  top: 100%;
+  height: 100svh;
+}
+
+@media (max-width: 1000px) {
+  .spotlight-panels {
+    height: 260px;
+  }
+
+  .spotlight-panel img {
+    width: 200px;
+  }
+}
+
+/* RAINBOW TEXT GLOW EFFECT */
+@keyframes rainbowGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-text-glow {
+  background: linear-gradient(to right,
+      #ff0055,
+      #ff5500,
+      #ffcc00,
+      #00ff66,
+      #00ccff,
+      #7700ff,
+      #ff00ff,
+      #ff0055);
+  background-size: 200% auto;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: rainbowGlow 8s linear infinite;
+  display: inline-block;
+}
+
+/* FORCE HIDE ORIGINAL CURSOR GLOBALLY AT ALL TIMES */
+html, body, *, *::before, *::after {
+  cursor: none !important;
 }
