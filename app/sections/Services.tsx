@@ -1,133 +1,121 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { spaceGrotesk, shareTechMono, elsie } from "@/app/lib/fonts";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import WallArt from "./services_components/WallArt";
-import PencilArt from "./services_components/PencilArt";
-import ColourPencil from "./services_components/ColourPencil";
-import AcrylicArt from "./services_components/AcrylicArt";
-import OilPainting from "./services_components/OilPainting";
-import Watercolor from "./services_components/Watercolor";
-import BloodArt from "./services_components/BloodArt";
+import { useRef } from "react";
+import { spaceGrotesk, elsie } from "@/app/lib/fonts";
+import { useScroll } from "framer-motion";
+import ServiceCard from "./services_components/ServiceCard";
+import { SilkWaveBg } from "@/app/components/ui/silk-wave-bg";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const servicesData = [
+  {
+    title: "Wall Art",
+    description:
+      "Architectural-scale mural integration synthesized with environment-specific spatial planning and structural surface mapping. Executed with high-viscosity aerosol polymers to transform massive vertical surfaces.",
+    images: ["/images/services/wall_art_1.jpg", "/images/services/wall_art_2.jpg", "/images/services/wall_art_3.jpg"],
+    color: "#081014", // Deep Midnight Teal
+  },
+  {
+    title: "Pencil Art",
+    description:
+      "Hyper-realistic monochromatic rendering protocols using fine-grain archival graphite, exploring extreme light values, microscopic skin texture details, and absolute shadow depth.",
+    images: ["/images/services/pencil_art_1.jpg", "/images/services/pencil_art_2.png", "/images/services/pencil_art_4.png"],
+    color: "#0d0d0d", // Dark Charcoal
+  },
+  {
+    title: "Colour Pencil",
+    description:
+      "Wax-core pigment synthesis overlaying multiple translucent layers to create vibrant, photorealistic depth and high-contrast saturation on archival heavy paper.",
+    images: ["/images/services/pencil_art_4.png", "/images/services/pencil_art_5.png", "/images/services/pencil_art_1.jpg"],
+    color: "#140a13", // Deep Amethyst
+  },
+  {
+    title: "Acrylic Art",
+    description:
+      "Acrylic structural polymer patterns observing knife density along custom canvas substrates, creating tactile, multi-dimensional surface textures.",
+    images: ["/images/services/acrylic_art_1.png", "/images/services/acrylic_art_2.png", "/images/services/acrylic_art_3.png"],
+    color: "#06120e", // Deep Forest Emerald
+  },
+  {
+    title: "Oil Painting",
+    description:
+      "Traditional slow-drying oil paint systems, leveraging multi-layered translucent glazes and rich oil mediums to achieve archival depth and complex physical light scattering.",
+    images: ["/images/services/wall_art_4.jpg", "/images/services/wall_art_5.jpg", "/images/services/wall_art_2.jpg"],
+    color: "#140a05", // Deep Espresso Brown
+  },
+  {
+    title: "Watercolor",
+    description:
+      "Translucent wash fluid dynamics executed on 100% cotton press substrate, controlling organic pigment bleeds and granulation for delicate landscape atmospheric depth.",
+    images: ["/images/services/acrylic_art_3.png", "/images/services/acrylic_art_4.png", "/images/services/acrylic_art_1.png"],
+    color: "#07131c", // Deep Ocean Blue
+  },
+  {
+    title: "Blood Art",
+    description:
+      "Avant-garde exploration using organic bio-pigments as a medium on custom substrates, exploring concepts of mortality, genetic history, and vital structures.",
+    images: ["/images/services/blood_art_1.png", "/images/services/blood_art_2.png", "/images/services/blood_art_4.png"],
+    color: "#170505", // Dark Crimson
+  },
+];
 
 export default function Services() {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Services Header
-      gsap.fromTo(
-        ".services-header",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".services-header",
-            start: "top 85%",
-          }
-        }
-      );
-
-      // 2. Horizontal divider reveal
-      gsap.fromTo(
-        ".services-divider-h",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1.4,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: ".services-divider-h",
-            start: "top 85%",
-          }
-        }
-      );
-
-      // 3. Vertical divider reveal
-      gsap.fromTo(
-        ".services-divider-v",
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: 1.4,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: ".services-divider-h",
-            start: "top 85%",
-          }
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <section
       id="services"
-      ref={containerRef}
-      className="relative w-full min-h-screen bg-neutral-950 overflow-hidden text-white px-6 md:px-12 py-24 md:py-36 border-t border-neutral-900"
+      data-scroll
+      data-scroll-section
+      className="relative w-full bg-neutral-950 text-white pb-32 border-t border-neutral-900"
     >
-      {/* Background Matrix Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+      {/* Dynamic Silk Wave Background */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <div className="sticky top-0 w-full h-screen">
+          <SilkWaveBg />
+        </div>
+      </div>
 
-      {/* Cohesive Glow Accents */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-rose-500/5 blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] rounded-full bg-sky-500/5 blur-[160px] pointer-events-none z-0" />
-
-      {/* Decorative Crosshairs */}
-      <div className="absolute top-10 left-10 text-white/20 select-none pointer-events-none font-mono text-xs z-10">+</div>
-      <div className="absolute top-10 right-10 text-white/20 select-none pointer-events-none font-mono text-xs z-10">+</div>
-      <div className="absolute bottom-10 left-10 text-white/20 select-none pointer-events-none font-mono text-xs z-10">+</div>
-      <div className="absolute bottom-10 right-10 text-white/20 select-none pointer-events-none font-mono text-xs z-10">+</div>
-
-      <div className="relative z-10 max-w-[1700px] mx-auto">
-
+      <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-12 pt-24 md:pt-36 pb-12">
         {/* Section Header */}
-        <div className="services-header flex items-center justify-between pb-6">
-          <h2 className={`text-xs md:text-sm uppercase tracking-[0.3em] text-neutral-400 font-bold ${spaceGrotesk.className}`}>
-            SPOTLIGHT <span className={`${elsie.className} text-orange-500 lowercase tracking-normal font-normal px-1.5`}>specializations</span> ///
+        <div className="flex items-center justify-between pb-6 border-b border-white/20">
+          <h2
+            className={`text-xs md:text-sm uppercase tracking-[0.3em] text-neutral-400 font-bold ${spaceGrotesk.className}`}
+          >
+            SPOTLIGHT{" "}
+            <span
+              className={`${elsie.className} text-orange-500 lowercase tracking-normal font-normal px-1.5`}
+            >
+              specializations
+            </span>{" "}
+            ///
           </h2>
-          <span className={`text-xs md:text-sm uppercase tracking-[0.25em] text-neutral-500 font-black ${spaceGrotesk.className}`}>
+          <span
+            className={`text-xs md:text-sm uppercase tracking-[0.25em] text-neutral-500 font-black ${spaceGrotesk.className}`}
+          >
             bernald arts*
           </span>
         </div>
+      </div>
 
-        {/* Content Area with Vertical line and Horizontal line intersection */}
-        <div className="relative w-full pt-8">
-          {/* Thicker, Brighter Horizontal Divider Line */}
-          <div
-            style={{ transformOrigin: "left" }}
-            className="services-divider-h absolute top-0 left-0 right-0 h-[2px] bg-white/40 z-20 pointer-events-none"
-          />
-
-          {/* Thicker, Brighter Vertical Framing Line starting exactly at horizontal line */}
-          <div
-            style={{ transformOrigin: "top" }}
-            className="services-divider-v absolute top-0 bottom-0 left-0 w-[2px] bg-white/40 z-20 pointer-events-none"
-          />
-
-          {/* Services List Grid */}
-          <div className="w-full flex flex-col pt-4">
-            <WallArt />
-            <PencilArt />
-            <ColourPencil />
-            <AcrylicArt />
-            <OilPainting />
-            <Watercolor />
-            <BloodArt />
-          </div>
-        </div>
-
+      {/* Stacked Cards Parallax Container */}
+      <div ref={containerRef} className="relative mt-[5vh] mb-[10vh]">
+        {servicesData.map((project, i) => {
+          const targetScale = 1 - (servicesData.length - i) * 0.05;
+          return (
+            <ServiceCard
+              key={`p_${i}`}
+              i={i}
+              {...project}
+              progress={scrollYProgress}
+              range={[i * (1 / servicesData.length), 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
       </div>
     </section>
   );

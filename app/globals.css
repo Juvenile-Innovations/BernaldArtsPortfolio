@@ -46,7 +46,6 @@ body {
   background: var(--gradient-glow), var(--gradient-primary);
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: "Inter", Arial, Helvetica, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   min-height: 100svh;
@@ -262,6 +261,10 @@ body {
 }
 
 /* FORCE HIDE ORIGINAL CURSOR GLOBALLY AT ALL TIMES */
-html, body, *, *::before, *::after {
+html,
+body,
+*,
+*::before,
+*::after {
   cursor: none !important;
 }

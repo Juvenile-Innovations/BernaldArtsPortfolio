@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Header from "./components/header";
+import SmoothScrollProvider from "./components/SmoothScrollProvider";
 
-const poppins = Poppins({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -106,15 +106,14 @@ export default function RootLayout({
         `}</style>
       </head>
       <body
-        className={`${poppins.className} min-h-screen flex flex-col antialiased bg-black text-white selection:bg-[#d4af37] selection:text-black`}
+        className={`${spaceGrotesk.className} min-h-screen flex flex-col antialiased bg-black text-white selection:bg-[#d4af37] selection:text-black`}
       >
-        <Navbar />
+        <SmoothScrollProvider />
+        <Header />
 
         <main className="flex-1 flex flex-col w-full">
           {children}
         </main>
-
-        <Footer />
       </body>
     </html>
   );

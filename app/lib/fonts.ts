@@ -5,6 +5,7 @@ import {
   Ms_Madi,
   Space_Grotesk,
   Share_Tech_Mono,
+  Cormorant_Garamond,
 } from "next/font/google";
 
 export const anton = Anton({
@@ -34,5 +35,11 @@ export const spaceGrotesk = Space_Grotesk({
 
 export const shareTechMono = Share_Tech_Mono({
   weight: "400",
+  subsets: ["latin"],
+});
+
+export const cormorant = Cormorant_Garamond({
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
