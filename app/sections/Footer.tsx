@@ -44,9 +44,9 @@ export default function Footer() {
             <h1 
               className={`text-[13vw] leading-none font-black tracking-tight text-transparent ${spaceGrotesk.className}`}
             >
-              <span style={{ WebkitTextStroke: "2px black", textStroke: "2px black" }}>BERN</span>
-              <span style={{ WebkitTextStroke: "2px white", textStroke: "2px white" }}>ALD</span>
-              <span style={{ WebkitTextStroke: "2px black", textStroke: "2px black" }}> ARTS</span>
+              <span style={{ WebkitTextStroke: "2px black" }}>BERN</span>
+              <span style={{ WebkitTextStroke: "2px white" }}>ALD</span>
+              <span style={{ WebkitTextStroke: "2px black" }}> ARTS</span>
             </h1>
           </div>
 
