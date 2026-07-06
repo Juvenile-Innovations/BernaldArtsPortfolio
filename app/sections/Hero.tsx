@@ -50,21 +50,23 @@ export default function Hero() {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    const createHeroAnimation = (isMobile: boolean) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#hero-pin",
           pin: true,
-          scrub: 1.2,
+          scrub: isMobile ? 0.5 : 1.2, // Faster, tighter scrub on mobile
           start: "top top",
-          end: "+=800px",
+          end: isMobile ? "+=500px" : "+=800px", // Less scroll distance required on mobile
         },
       });
 
       // Video box collapses into a white circle
       tl.to(videoWrapRef.current, {
-        width: "180px",
-        height: "180px",
+        width: isMobile ? "140px" : "180px", // Slightly smaller ball on mobile
+        height: isMobile ? "140px" : "180px",
         borderRadius: "50%",
         ease: "power2.inOut",
         duration: 1,
@@ -113,9 +115,13 @@ export default function Hero() {
         },
         0,
       );
-    });
+    };
 
-    return () => ctx.revert();
+    // Apply different animation configurations based on screen size
+    mm.add("(min-width: 768px)", () => createHeroAnimation(false));
+    mm.add("(max-width: 767px)", () => createHeroAnimation(true));
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -215,7 +221,7 @@ export default function Hero() {
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1
-            className={`w-full text-center text-[18vw] md:text-[14.8vw] leading-[0.8] select-none whitespace-nowrap pb-[8vw] md:pb-[4vw] lg:pb-2 font-black uppercase ${spaceGrotesk.className}`}
+            className={`w-full text-center text-[12.5vw] md:text-[13.5vw] lg:text-[14.2vw] xl:text-[14.5vw] leading-[0.8] select-none whitespace-nowrap pb-[8vw] md:pb-[4vw] lg:pb-2 font-black uppercase ${spaceGrotesk.className}`}
           >
             <span
               className="block bg-clip-text text-transparent tracking-[-0.02em]"

@@ -24,15 +24,7 @@ const works = [
       "Large-scale architectural murals fusing industrial spray paint, heavy acrylic overlays, and custom stencils on concrete walls — redefining public space as tactile material art.",
     desc2:
       "Commissioned across Tamil Nadu, each mural is adaptive to its environment and engineered to weather time and exposure.",
-  },
-  {
-    title: "Mixed Media Art",
-    src: "/images/about/about_2.png",
-    desc1:
-      "Dense multi-surface compositions blending canvas fabrics with industrial resin, gold-leaf highlights, and textured pastes to create tangible, multidimensional artwork.",
-    desc2:
-      "Every piece is a custom sensory installation — no two works share the same material palette.",
-  },
+  }
 ];
 
 // ── AnimatedText — smooth cinematic slide from the left ───────────────────
@@ -68,13 +60,13 @@ function AnimatedText({
   return (
     <p
       ref={textRef}
+      className="whitespace-normal md:whitespace-nowrap max-w-[90vw] md:max-w-none leading-snug md:leading-[1.35]"
       style={{
         margin: 0,
         marginBottom: "0.15em",
         fontStyle: isName ? "italic" : "normal",
         fontWeight: isName ? 400 : 300,
         position: "relative", // required for x transform to work
-        whiteSpace: "nowrap",
       }}
     >
       {children}
@@ -86,26 +78,55 @@ export default function About() {
   const [selectedWork, setSelectedWork] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
+  const imageInnerRef = useRef<HTMLDivElement>(null);
 
   // ── Projects: pin the image panel only within the About container ────────
-  // Using endTrigger scoped to containerRef so the image unpins the moment
-  // the About section's bottom reaches the viewport bottom — it won't bleed
-  // into any subsequent sections.
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop: Pin at the top
+    mm.add("(min-width: 768px)", () => {
       ScrollTrigger.create({
         trigger: imageContainerRef.current,
         pin: true,
         pinSpacing: false,
         start: "top-=100px top",
         endTrigger: containerRef.current,
-        end: "bottom bottom",
+        end: "bottom top", // Stay pinned until the entire container leaves the screen
       });
     });
 
-    return () => ctx.revert();
+    // Mobile: Pin at the bottom
+    mm.add("(max-width: 767px)", () => {
+      // Pin image when its bottom hits the bottom of the viewport
+      ScrollTrigger.create({
+        trigger: imageContainerRef.current,
+        pin: true,
+        pinSpacing: false, // We use a wrapper div to prevent jump
+        start: "bottom bottom",
+        endTrigger: containerRef.current,
+        end: "bottom top", // Stay pinned until the entire container leaves the screen
+      });
+    });
+
+    // All screens: Particle-like fade out at the very end
+    mm.add("all", () => {
+      gsap.to(imageInnerRef.current, {
+        opacity: 0,
+        filter: "blur(20px)",
+        scale: 0.9,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "bottom 60%", // Starts fading when the stats are midway up the screen
+          end: "bottom top",   // Finishes fading when the section completely leaves the screen
+          scrub: true,
+        }
+      });
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -126,14 +147,12 @@ export default function About() {
           Cormorant Garamond italic — cinematic slide-in from left per phrase
           ════════════════════════════════════════════════════════════════════ */}
       <div
-        className={`relative z-10 pointer-events-none ${cormorant.className}`}
+        className={`relative z-10 pointer-events-none mt-[35vw] ml-[5vw] md:mt-[20vw] md:ml-[10vw] ${cormorant.className}`}
         style={{
           color: "white",
-          fontSize: "clamp(1.6rem, 3.2vw, 4rem)",
+          fontSize: "clamp(1.8rem, 3.2vw, 4rem)",
           lineHeight: 1.35,
           letterSpacing: "0.02em",
-          marginTop: "30vw",
-          marginLeft: "10vw",
           overflow: "hidden",
         }}
       >
@@ -157,49 +176,75 @@ export default function About() {
       >
         {/* ── Image + description row ── */}
         <div className="flex flex-col md:flex-row h-auto md:h-[700px] justify-between gap-8 md:gap-[5%]">
-          {/* Pinned image panel */}
-          <div
-            ref={imageContainerRef}
-            className="relative h-[400px] md:h-full w-full md:w-[40%] flex-shrink-0"
-          >
-            <Image
-              src={works[selectedWork].src}
-              fill
-              alt={works[selectedWork].title}
-              priority
-              className="object-cover rounded-lg md:rounded-none"
-            />
+          {/* Pinned image panel Wrapper (preserves layout height when pinned) */}
+          <div className="relative h-[400px] md:h-full w-full md:w-[40%] flex-shrink-0 z-0">
+            {/* The actual pinned element */}
+            <div
+              ref={imageContainerRef}
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* Inner element for animations to prevent pin conflicts */}
+              <div ref={imageInnerRef} className="relative w-full h-full">
+                <Image
+                  src={works[selectedWork].src}
+                  fill
+                  alt={works[selectedWork].title}
+                  priority
+                  className="object-cover rounded-lg md:rounded-none"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Text Content Container (Mobile: below image, Desktop: side-by-side) */}
-          <div className="flex flex-col sm:flex-row md:flex-row w-full md:w-[55%] gap-6 md:gap-[5%] justify-between">
+          <div className="relative z-10 flex flex-col sm:flex-row md:flex-row w-full md:w-[55%] gap-6 md:gap-[5%] justify-between">
             {/* Column 1 — primary description */}
-            <div className="flex w-full sm:w-[45%] md:w-[45%] text-[4vw] sm:text-[2.5vw] md:text-[1.6vw] leading-relaxed">
-              <p className="m-0">{works[selectedWork].desc1}</p>
+            <div className="flex flex-col w-full sm:w-[45%] md:w-[45%] drop-shadow-md">
+              <p className="m-0 text-[4vw] sm:text-[2.5vw] md:text-[1.6vw] leading-relaxed">{works[selectedWork].desc1}</p>
+              
+              <style>{`
+                @keyframes signatureGlow {
+                  0% { 
+                    text-shadow: 0 0 10px rgba(255, 10, 84, 0.5), 0 0 20px rgba(255, 10, 84, 0.3); 
+                  }
+                  100% { 
+                    text-shadow: 0 0 20px rgba(255, 10, 84, 1), 0 0 40px rgba(255, 10, 84, 0.8), 0 0 60px rgba(255, 10, 84, 0.5), 0 0 80px rgba(255, 10, 84, 0.3); 
+                  }
+                }
+                .glow-text-anim {
+                  animation: signatureGlow 2s ease-in-out infinite alternate;
+                }
+              `}</style>
+              <h4 className={`glow-text-anim m-0 mt-10 md:mt-16 text-5xl sm:text-6xl md:text-[4vw] font-bold italic text-[#ff0a54] tracking-wide ${cormorant.className}`}>
+                HI I'M BERNALD GEORGE
+              </h4>
             </div>
 
             {/* Column 2 — secondary description, aligned to bottom on desktop */}
-            <div className="flex w-full sm:w-[45%] md:w-[45%] text-[3.5vw] sm:text-[2vw] md:text-[1vw] items-start md:items-end leading-relaxed text-neutral-400 md:text-white">
+            <div className="flex w-full sm:w-[45%] md:w-[45%] text-[3.5vw] sm:text-[2vw] md:text-[1vw] items-start md:items-end leading-relaxed text-neutral-300 md:text-white drop-shadow-md">
               <p className="m-0">{works[selectedWork].desc2}</p>
             </div>
           </div>
         </div>
 
-        {/* ── Project / Work list ── */}
+        {/* ── Statistics / Milestones (Vertical) ── */}
         <div className="flex flex-col relative mt-24 md:mt-[200px] pb-24 md:pb-0">
-          {works.map((work, index) => (
+          {[
+            { value: "2000+", label: "Projects" },
+            { value: "3X", label: "World Records" },
+            { value: "15+", label: "Years Active" },
+            { value: "10K+", label: "Happy Customers" },
+          ].map((stat, index) => (
             <div
               key={index}
-              onMouseOver={() => setSelectedWork(index)}
-              onClick={() => setSelectedWork(index)} // For mobile touch
-              className={`w-full uppercase border-b flex justify-start md:justify-end transition-colors duration-300 cursor-pointer md:cursor-default ${selectedWork === index
-                  ? "text-orange-500 border-orange-500 md:border-white"
-                  : "text-white border-white border-opacity-30 md:border-opacity-100"
-                }`}
+              className="w-full border-b border-white/20 flex flex-col md:flex-row items-start md:items-end justify-between py-8 md:py-[40px]"
             >
-              <h2 className="m-0 mt-6 mb-3 md:mt-[40px] md:mb-[20px] text-[8vw] md:text-[3vw] tracking-tight">
-                {work.title}
-              </h2>
+              <p className="m-0 mb-4 md:mb-2 text-xs md:text-sm uppercase tracking-[0.4em] text-neutral-400 font-bold order-2 md:order-1">
+                {stat.label}
+              </p>
+              <h3 className={`m-0 text-6xl md:text-[6vw] font-light text-orange-500 leading-none order-1 md:order-2 mb-2 md:mb-0 ${cormorant.className}`}>
+                {stat.value}
+              </h3>
             </div>
           ))}
         </div>

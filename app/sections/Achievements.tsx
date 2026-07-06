@@ -17,9 +17,13 @@ export default function Achievements() {
 
       {/* 2. Community */}
       <ParallaxSection
-        src="/images/gallery/image03.jpg"
+        src="/images/communityBG.png"
         title="50K+ Community"
         description="Engaging with a global audience of art enthusiasts, collectors, and creators through daily visual updates on Instagram."
+        action={{
+          label: "Join on Instagram",
+          url: "https://www.instagram.com/bernald_george_official/",
+        }}
       />
 
       {/* 3. All Over India */}
@@ -36,10 +40,12 @@ const ParallaxSection = ({
   src,
   title,
   description,
+  action,
 }: {
   src: string;
   title: string;
   description: string;
+  action?: { label: string; url: string };
 }) => {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -56,14 +62,29 @@ const ParallaxSection = ({
       className="relative flex items-center justify-center h-screen overflow-hidden border-b border-neutral-900"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="relative z-10 p-10 md:p-20 mix-blend-difference text-white w-full h-full flex flex-col justify-between">
+      <div className="relative z-10 p-10 md:p-20 w-full h-full flex flex-col justify-between">
+        <div className="w-full md:w-[40vw] md:self-end flex flex-col items-end md:items-start text-right md:text-left">
+          <p
+            className={`text-sm md:text-xl uppercase leading-relaxed text-white mix-blend-difference ${shareTechMono.className}`}
+          >
+            {description}
+          </p>
+          {action && (
+            <a
+              href={action.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-6 inline-flex items-center justify-center px-8 md:px-10 py-3 md:py-4 text-white hover:opacity-90 transition-all duration-300 hover:scale-105 active:scale-95 font-bold uppercase tracking-widest text-xs md:text-sm rounded-full shadow-[0_4px_14px_0_rgba(220,39,67,0.39)] ${shareTechMono.className}`}
+              style={{
+                background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)"
+              }}
+            >
+              {action.label}
+            </a>
+          )}
+        </div>
         <p
-          className={`w-full md:w-[40vw] text-sm md:text-xl md:self-end uppercase mix-blend-difference leading-relaxed text-right md:text-left ${shareTechMono.className}`}
-        >
-          {description}
-        </p>
-        <p
-          className={`text-5xl md:text-[7vw] leading-none font-black uppercase mix-blend-difference ${spaceGrotesk.className}`}
+          className={`text-5xl md:text-[7vw] leading-none font-black uppercase text-white mix-blend-difference ${spaceGrotesk.className}`}
         >
           {title}
         </p>

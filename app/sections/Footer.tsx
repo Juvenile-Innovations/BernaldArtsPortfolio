@@ -41,12 +41,22 @@ export default function Footer() {
           
           {/* Overlapping Text (Moved to Front) */}
           <div className="absolute bottom-4 md:bottom-8 w-full text-center pointer-events-none z-20">
+            <style>{`
+              .stroke-adaptive {
+                -webkit-text-stroke: 2px white;
+              }
+              @media (min-width: 768px) {
+                .stroke-adaptive {
+                  -webkit-text-stroke: 2px black;
+                }
+              }
+            `}</style>
             <h1 
               className={`text-[13vw] leading-none font-black tracking-tight text-transparent ${spaceGrotesk.className}`}
             >
-              <span style={{ WebkitTextStroke: "2px black" }}>BERN</span>
+              <span className="stroke-adaptive">BERN</span>
               <span style={{ WebkitTextStroke: "2px white" }}>ALD</span>
-              <span style={{ WebkitTextStroke: "2px black" }}> ARTS</span>
+              <span className="stroke-adaptive"> ARTS</span>
             </h1>
           </div>
 
