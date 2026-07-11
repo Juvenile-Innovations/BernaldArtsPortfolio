@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     siteName: "Bernald Arts",
     images: [
       {
-        url: "/images/share_image.png",
+        url: "/images/brand/share_image.png",
         width: 1200,
         height: 630,
         alt: "Bernald Arts Portfolio",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "Bernald Arts | Multi-Surface Mixed-Media Artist",
     description:
       "Creating timeless artwork through imagination, craftsmanship, and visual storytelling.",
-    images: ["/images/share_image.png"],
+    images: ["/images/brand/share_image.png"],
   },
 
   icons: {

@@ -11,50 +11,71 @@ const servicesData = [
     title: "Wall Art",
     description:
       "Architectural-scale mural integration synthesized with environment-specific spatial planning and structural surface mapping. Executed with high-viscosity aerosol polymers to transform massive vertical surfaces.",
-    images: ["/images/services/wall_art_1.jpg", "/images/services/wall_art_2.jpg", "/images/services/wall_art_3.jpg", "/images/services/wall_art_4.jpg"],
+    images: ["/images/services/wall_art/wall_art_1.jpg", "/images/services/wall_art/wall_art_2.jpg", "/images/services/wall_art/wall_art_3.jpg", "/images/services/wall_art/wall_art_4.jpg"],
     color: "#06b6d4", // Vibrant Cyan
   },
   {
     title: "Pencil Art",
     description:
       "Hyper-realistic monochromatic rendering protocols using fine-grain archival graphite, exploring extreme light values, microscopic skin texture details, and absolute shadow depth.",
-    images: ["/images/services/pencil_art_1.jpg", "/images/services/pencil_art_2.png", "/images/services/pencil_art_4.png", "/images/services/pencil_art_5.png"],
+    images: ["/images/services/pencil_art/pencil_art_1.jpg", "/images/services/pencil_art/pencil_art_2.png", "/images/services/pencil_art/pencil_art_4.png", "/images/services/pencil_art/pencil_art_5.png"],
     color: "#64748b", // Slate Gray
   },
   {
     title: "Colour Pencil",
     description:
       "Wax-core pigment synthesis overlaying multiple translucent layers to create vibrant, photorealistic depth and high-contrast saturation on archival heavy paper.",
-    images: ["/images/services/pencil_art_4.png", "/images/services/pencil_art_5.png", "/images/services/pencil_art_1.jpg", "/images/services/pencil_art_2.png"],
+    images: ["/images/services/colour_pencil/1.png", "/images/services/colour_pencil/2.png", "/images/services/colour_pencil/3.jpg", "/images/services/colour_pencil/4.png"],
     color: "#a855f7", // Vibrant Purple
   },
   {
     title: "Acrylic Art",
     description:
       "Acrylic structural polymer patterns observing knife density along custom canvas substrates, creating tactile, multi-dimensional surface textures.",
-    images: ["/images/services/acrylic_art_1.png", "/images/services/acrylic_art_2.png", "/images/services/acrylic_art_3.png", "/images/services/acrylic_art_4.png"],
+    images: ["/images/services/acrylic_art/acrylic_art_1.png", "/images/services/acrylic_art/acrylic_art_2.png", "/images/services/acrylic_art/acrylic_art_3.png", "/images/services/acrylic_art/acrylic_art_4.png"],
     color: "#10b981", // Bright Emerald
   },
   {
     title: "Oil Painting",
     description:
       "Traditional slow-drying oil paint systems, leveraging multi-layered translucent glazes and rich oil mediums to achieve archival depth and complex physical light scattering.",
-    images: ["/images/services/wall_art_4.jpg", "/images/services/wall_art_5.jpg", "/images/services/wall_art_2.jpg", "/images/services/wall_art_1.jpg"],
+    images: ["/images/services/oil_painting/1.jpg", "/images/services/oil_painting/2.jpg", "/images/services/oil_painting/3.jpg", "/images/services/oil_painting/4.jpg"],
     color: "#ea580c", // Rich Orange
   },
   {
     title: "Watercolor",
     description:
       "Translucent wash fluid dynamics executed on 100% cotton press substrate, controlling organic pigment bleeds and granulation for delicate landscape atmospheric depth.",
-    images: ["/images/services/acrylic_art_3.png", "/images/services/acrylic_art_4.png", "/images/services/acrylic_art_1.png", "/images/services/acrylic_art_2.png"],
+    images: ["/images/services/watercolor/1.png", "/images/services/watercolor/2.png", "/images/services/watercolor/3.png", "/images/services/watercolor/4.png"],
     color: "#0ea5e9", // Sky Blue
   },
   {
     title: "Blood Art",
     description:
       "Avant-garde exploration using organic bio-pigments as a medium on custom substrates, exploring concepts of mortality, genetic history, and vital structures.",
-    images: ["/images/services/blood_art_1.png", "/images/services/blood_art_2.png", "/images/services/blood_art_4.png", "/images/services/blood_art_1.png"],
+    images: ["/images/services/blood_art/blood_art_1.png", "/images/services/blood_art/blood_art_2.png", "/images/services/blood_art/blood_art_4.png", "/images/services/blood_art/blood_art_1.png"],
     color: "#e11d48", // Vivid Rose Red
+  },
+  {
+    title: "Feather Art",
+    description:
+      "Intricate microscopic illustration and pigment application on fragile, organically sourced avian feathers. Requires extreme precision and zero-gravity brush control.",
+    images: ["/images/services/feather_art/feather_art_1.jpg", "/images/services/feather_art/feather_art_2.jpg", "/images/services/feather_art/feather_art_3.jpg", "/images/services/feather_art/feather_art_4.jpg"],
+    color: "#fbbf24", // Amber Gold
+  },
+  {
+    title: "Paper Cut",
+    description:
+      "Meticulous extraction of negative space from single sheets of archival paper using surgical scalpels, resulting in delicate, multi-layered silhouette architectures.",
+    images: ["/images/services/paper_cut/paper_cut_1.jpg", "/images/services/paper_cut/paper_cut_2.jpg"],
+    color: "#c084fc", // Soft Lavender
+  },
+  {
+    title: "Digital Art",
+    description:
+      "High-fidelity digital illustration and conceptual rendering using advanced stylus technologies, specializing in cinematic lighting, complex matte painting, and ultra-detailed character concepts.",
+    images: ["/images/services/digital_art/digital_art_1.JPG", "/images/services/digital_art/digital_art_2.JPG", "/images/services/digital_art/digital_art_3.JPG", "/images/services/digital_art/digital_art_4.JPG"],
+    color: "#3b82f6", // Vibrant Blue
   },
 ];
 

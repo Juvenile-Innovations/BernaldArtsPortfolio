@@ -41,7 +41,7 @@ export default function ServiceCard({
     >
       <motion.div
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #f4f4f5 100%)",
+          backgroundColor: "#ffffff",
           scale,
           top: `calc(-10vh + ${i * 25}px)`,
           borderColor: color,
@@ -49,34 +49,39 @@ export default function ServiceCard({
         }}
         className="flex flex-col relative h-auto min-h-[550px] sm:min-h-[600px] md:h-[650px] w-full max-w-[1000px] lg:max-w-[1300px] rounded-[30px] md:rounded-[40px] p-6 sm:p-10 md:p-[50px] lg:p-[60px] origin-top mx-4 md:mx-auto shadow-[0_-10px_50px_-15px_rgba(0,0,0,0.5)] overflow-hidden"
       >
-        {/* Unique Background Texture & Glow */}
+        {/* Unique Background Texture & Image Blur */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          {/* Subtle colored glow matching the border */}
-          <div 
-            className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[100px] opacity-[0.15]"
-            style={{ backgroundColor: color }}
+          {/* Blurry Image Background */}
+          <Image
+            src={images[0]}
+            alt="Card background blur"
+            fill
+            className="object-cover opacity-80 blur-[6px] scale-110"
           />
+          
+          {/* Extremely light transparent wash overlay */}
+          <div className="absolute inset-0 bg-white/20" />
+
           {/* Subtle architectural dot pattern */}
           <div 
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.05]"
             style={{ backgroundImage: 'radial-gradient(black 1px, transparent 1px)', backgroundSize: '24px 24px' }}
           />
         </div>
 
-        <h2
-          className={`relative z-10 text-left m-0 text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight text-neutral-900 ${spaceGrotesk.className}`}
-        >
-          {title}
-        </h2>
-
-        <div className="relative z-10 flex flex-col md:flex-row h-full mt-6 md:mt-[40px] gap-6 md:gap-[60px]">
-          <div className="w-full md:w-[35%] relative flex flex-col justify-between">
-            <p
-              className={`text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-neutral-600 font-medium ${spaceGrotesk.className}`}
-            >
-              {description}
-            </p>
-            <div className="mt-6 md:mt-0 mb-2 md:mb-10">
+        <div className="relative z-10 flex flex-col md:flex-row h-full gap-8 md:gap-12">
+          
+          {/* Left Content Area */}
+          <div className="w-full md:w-[35%] flex flex-col justify-between">
+            <div className="flex flex-col gap-4">
+              <h2 className={`text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-[1.1] font-black tracking-tighter text-neutral-900 ${spaceGrotesk.className}`}>
+                {title}
+              </h2>
+              <p className="text-base sm:text-lg text-neutral-600 font-medium leading-relaxed mt-4 w-full md:max-w-[90%]">
+                {description}
+              </p>
+            </div>
+            <div className="mt-6 md:mt-0">
               <a
                 href="#contact"
                 onClick={() => {
@@ -95,7 +100,7 @@ export default function ServiceCard({
           <div className="relative w-full md:w-[65%] h-64 sm:h-80 md:h-full grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-2 md:gap-4">
             
             {/* Main Feature Image (Left Half on Desktop, Top Left on Mobile) */}
-            <div className="col-span-1 md:col-span-2 row-span-1 md:row-span-2 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
+            <div className={`col-span-1 md:col-span-2 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5 ${images.length === 2 ? "row-span-2" : "row-span-1 md:row-span-2"}`}>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
               <Image 
                 fill 
@@ -106,8 +111,8 @@ export default function ServiceCard({
               />
             </div>
 
-            {/* Top Right Wide Image (Top Right on Mobile) */}
-            <div className="col-span-1 md:col-span-2 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
+            {/* Second Feature Image (Top Right on Mobile, Right Half if only 2 images) */}
+            <div className={`col-span-1 md:col-span-2 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5 ${images.length === 2 ? "row-span-2" : "row-span-1"}`}>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
               <Image 
                 fill 
@@ -118,29 +123,33 @@ export default function ServiceCard({
               />
             </div>
 
-            {/* Bottom Right Small Image 1 */}
-            <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-              <Image 
-                fill 
-                sizes="(max-width: 768px) 50vw, 15vw" 
-                src={images[2]} 
-                alt={`${title} 3`} 
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-              />
-            </div>
+            {/* Bottom Right Small Image 1 (Only rendered if more than 2 images exist) */}
+            {images.length > 2 && images[2] && (
+              <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+                <Image 
+                  fill 
+                  sizes="(max-width: 768px) 50vw, 15vw" 
+                  src={images[2]} 
+                  alt={`${title} 3`} 
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                />
+              </div>
+            )}
 
-            {/* Bottom Right Small Image 2 */}
-            <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-              <Image 
-                fill 
-                sizes="(max-width: 768px) 50vw, 15vw" 
-                src={images[3]} 
-                alt={`${title} 4`} 
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-              />
-            </div>
+            {/* Bottom Right Small Image 2 (Only rendered if more than 2 images exist) */}
+            {images.length > 2 && images[3] && (
+              <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+                <Image 
+                  fill 
+                  sizes="(max-width: 768px) 50vw, 15vw" 
+                  src={images[3]} 
+                  alt={`${title} 4`} 
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                />
+              </div>
+            )}
 
           </div>
         </div>

@@ -12,7 +12,7 @@ export default function Footer() {
         {/* Massive Blurred Logo in the Background (Moved to Right, Angled, Reduced Blur) */}
         <div className="absolute top-1/2 right-[-20vw] md:right-[-10vw] -translate-y-1/2 w-[100vw] h-[100vw] md:w-[60vw] md:h-[60vw] opacity-20 rotate-[15deg] pointer-events-none">
           <Image
-            src="/images/BernaldArtsLogo.png"
+            src="/images/brand/BernaldArtsLogo.png"
             alt="Bernald Arts Logo Background"
             fill
             className="object-contain"
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* Artist Portrait (Centered, stuck to bottom, massive scale, Moved to Back) */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120vw] md:w-[100vw] h-[75vh] md:h-[95vh] z-10 pointer-events-none">
             <Image
-              src="/images/footer_boss.png"
+              src="/images/assets/footer_boss.png"
               alt="Bernald Arts Portrait"
               fill
               className="object-contain object-bottom"

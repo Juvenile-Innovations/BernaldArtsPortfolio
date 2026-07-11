@@ -154,7 +154,7 @@ export default function Hero() {
         {/* Flaticon Logo inside the ball, initially hidden */}
         <img
           ref={logoRef}
-          src="/images/BernaldArtsLogo.png"
+          src="/images/brand/BernaldArtsLogo.png"
           alt="Hero Icon"
           className="absolute w-30 h-30 object-contain z-20 opacity-0"
         />

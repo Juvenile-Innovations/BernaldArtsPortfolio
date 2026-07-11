@@ -17,7 +17,7 @@ export default function Achievements() {
 
       {/* 2. Community */}
       <ParallaxSection
-        src="/images/communityBG.png"
+        src="/images/backgrounds/communityBG.png"
         title="50K+ Community"
         description="Engaging with a global audience of art enthusiasts, collectors, and creators through daily visual updates on Instagram."
         action={{
