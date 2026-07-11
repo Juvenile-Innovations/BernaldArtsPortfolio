@@ -244,14 +244,28 @@ export default function GalleryCarousel({
   return (
     <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
       {/* Blurred background layers */}
-      {items.map((item, i) => (
-        <div
-          key={`bg-${i}`}
-          className="slide__bg"
-          style={{ "--bg": `url(${item.src})` } as React.CSSProperties}
-          {...getAttr(i)}
-        />
-      ))}
+      {items.map((item, i) => {
+        const isVideo = /\.(mp4|webm|ogg)$/i.test(item.src);
+        return (
+          <div
+            key={`bg-${i}`}
+            className="slide__bg"
+            style={!isVideo ? { "--bg": `url(${item.src})` } as React.CSSProperties : {}}
+            {...getAttr(i)}
+          >
+            {isVideo && (
+              <video
+                src={item.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            )}
+          </div>
+        );
+      })}
 
       <div className="slider">
         <button
@@ -276,20 +290,34 @@ export default function GalleryCarousel({
         <div className="slides__wrapper">
           {/* Card slides */}
           <div className="slides">
-            {items.map((item, i) => (
-              <div key={`slide-${i}`} className="slide" {...getAttr(i)}>
-                <div className="slide__inner">
-                  <div className="slide--image__wrapper">
-                    <img
-                      className="slide--image"
-                      src={item.src}
-                      alt={item.title}
-                      loading={i === 0 ? "eager" : "lazy"}
-                    />
+            {items.map((item, i) => {
+              const isVideo = /\.(mp4|webm|ogg)$/i.test(item.src);
+              return (
+                <div key={`slide-${i}`} className="slide" {...getAttr(i)}>
+                  <div className="slide__inner">
+                    <div className="slide--image__wrapper">
+                      {isVideo ? (
+                        <video
+                          className="slide--image"
+                          src={item.src}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        />
+                      ) : (
+                        <img
+                          className="slide--image"
+                          src={item.src}
+                          alt={item.title}
+                          loading={i === 0 ? "eager" : "lazy"}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Text info */}

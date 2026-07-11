@@ -11,8 +11,9 @@ const servicesData = [
     title: "Wall Art",
     description:
       "Architectural-scale mural integration synthesized with environment-specific spatial planning and structural surface mapping. Executed with high-viscosity aerosol polymers to transform massive vertical surfaces.",
-    images: ["/images/services/wall_art/wall_art_1.jpg", "/images/services/wall_art/wall_art_2.jpg", "/images/services/wall_art/wall_art_3.jpg", "/images/services/wall_art/wall_art_4.jpg"],
+    images: ["/images/services/wall_art/wall_art_4.jpg", "/images/services/wall_art/wall_art_1.jpg", "/images/services/wall_art/wall_art_3.jpg", "/images/services/wall_art/wall_art_2.jpg"],
     color: "#06b6d4", // Vibrant Cyan
+    bgImage: "/images/services/wall_art/wall_art_1.jpg", 
   },
   {
     title: "Pencil Art",
@@ -20,6 +21,7 @@ const servicesData = [
       "Hyper-realistic monochromatic rendering protocols using fine-grain archival graphite, exploring extreme light values, microscopic skin texture details, and absolute shadow depth.",
     images: ["/images/services/pencil_art/pencil_art_1.jpg", "/images/services/pencil_art/pencil_art_2.png", "/images/services/pencil_art/pencil_art_4.png", "/images/services/pencil_art/pencil_art_5.png"],
     color: "#64748b", // Slate Gray
+    bgImage: "/images/services/pencil_art/pencil_art_2.png", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Colour Pencil",
@@ -27,13 +29,15 @@ const servicesData = [
       "Wax-core pigment synthesis overlaying multiple translucent layers to create vibrant, photorealistic depth and high-contrast saturation on archival heavy paper.",
     images: ["/images/services/colour_pencil/1.png", "/images/services/colour_pencil/2.png", "/images/services/colour_pencil/3.jpg", "/images/services/colour_pencil/4.png"],
     color: "#a855f7", // Vibrant Purple
+    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Acrylic Art",
     description:
       "Acrylic structural polymer patterns observing knife density along custom canvas substrates, creating tactile, multi-dimensional surface textures.",
-    images: ["/images/services/acrylic_art/acrylic_art_1.png", "/images/services/acrylic_art/acrylic_art_2.png", "/images/services/acrylic_art/acrylic_art_3.png", "/images/services/acrylic_art/acrylic_art_4.png"],
+    images: ["/images/services/acrylic_art/acrylic_art_1.png", "/images/services/acrylic_art/acrylic_art_4.png", "/images/services/acrylic_art/acrylic_art_3.png", "/images/services/acrylic_art/acrylic_art_2.png"],
     color: "#10b981", // Bright Emerald
+    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Oil Painting",
@@ -41,6 +45,7 @@ const servicesData = [
       "Traditional slow-drying oil paint systems, leveraging multi-layered translucent glazes and rich oil mediums to achieve archival depth and complex physical light scattering.",
     images: ["/images/services/oil_painting/1.jpg", "/images/services/oil_painting/2.jpg", "/images/services/oil_painting/3.jpg", "/images/services/oil_painting/4.jpg"],
     color: "#ea580c", // Rich Orange
+    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Watercolor",
@@ -48,20 +53,23 @@ const servicesData = [
       "Translucent wash fluid dynamics executed on 100% cotton press substrate, controlling organic pigment bleeds and granulation for delicate landscape atmospheric depth.",
     images: ["/images/services/watercolor/1.png", "/images/services/watercolor/2.png", "/images/services/watercolor/3.png", "/images/services/watercolor/4.png"],
     color: "#0ea5e9", // Sky Blue
+    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Blood Art",
     description:
       "Avant-garde exploration using organic bio-pigments as a medium on custom substrates, exploring concepts of mortality, genetic history, and vital structures.",
-    images: ["/images/services/blood_art/blood_art_1.png", "/images/services/blood_art/blood_art_2.png", "/images/services/blood_art/blood_art_4.png", "/images/services/blood_art/blood_art_1.png"],
+    images: ["/images/services/blood_art/blood_art_1.png", "/images/services/blood_art/blood_art_2.png", "/images/services/blood_art/blood_art_4.png", "/images/services/blood_art/blood_art_3.jpg"],
     color: "#e11d48", // Vivid Rose Red
+    bgImage: "/images/services/blood_art/blood_art_2.png", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Feather Art",
     description:
       "Intricate microscopic illustration and pigment application on fragile, organically sourced avian feathers. Requires extreme precision and zero-gravity brush control.",
-    images: ["/images/services/feather_art/feather_art_1.jpg", "/images/services/feather_art/feather_art_2.jpg", "/images/services/feather_art/feather_art_3.jpg", "/images/services/feather_art/feather_art_4.jpg"],
+    images: ["/images/services/feather_art/feather_art_3.jpg", "/images/services/feather_art/feather_art_4.jpg", "/images/services/feather_art/feather_art_1.jpg", "/images/services/feather_art/feather_art_2.jpg"],
     color: "#fbbf24", // Amber Gold
+    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Paper Cut",
@@ -69,6 +77,7 @@ const servicesData = [
       "Meticulous extraction of negative space from single sheets of archival paper using surgical scalpels, resulting in delicate, multi-layered silhouette architectures.",
     images: ["/images/services/paper_cut/paper_cut_1.jpg", "/images/services/paper_cut/paper_cut_2.jpg"],
     color: "#c084fc", // Soft Lavender
+    bgImage: "/images/services/paper_cut/paper_cut_2.jpg", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Digital Art",
@@ -76,6 +85,7 @@ const servicesData = [
       "High-fidelity digital illustration and conceptual rendering using advanced stylus technologies, specializing in cinematic lighting, complex matte painting, and ultra-detailed character concepts.",
     images: ["/images/services/digital_art/digital_art_1.JPG", "/images/services/digital_art/digital_art_2.JPG", "/images/services/digital_art/digital_art_3.JPG", "/images/services/digital_art/digital_art_4.JPG"],
     color: "#3b82f6", // Vibrant Blue
+    bgImage: "/images/services/digital_art/digital_art_1.JPG", // ADD SPECIFIC BG IMAGE HERE
   },
 ];
 

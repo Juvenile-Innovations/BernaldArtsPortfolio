@@ -10,6 +10,7 @@ interface CardProps {
   title: string;
   description: string;
   images: string[];
+  bgImage?: string;
   color: string;
   progress: MotionValue<number>;
   range: [number, number];
@@ -21,6 +22,7 @@ export default function ServiceCard({
   title,
   description,
   images,
+  bgImage,
   color,
   progress,
   range,
@@ -53,7 +55,7 @@ export default function ServiceCard({
         <div className="absolute inset-0 pointer-events-none z-0">
           {/* Blurry Image Background */}
           <Image
-            src={images[0]}
+            src={bgImage || images[0]}
             alt="Card background blur"
             fill
             className="object-cover opacity-80 blur-[6px] scale-110"
@@ -102,38 +104,32 @@ export default function ServiceCard({
             {/* Main Feature Image (Left Half on Desktop, Top Left on Mobile) */}
             <div className={`col-span-1 md:col-span-2 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5 ${images.length === 2 ? "row-span-2" : "row-span-1 md:row-span-2"}`}>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-              <Image 
-                fill 
-                sizes="(max-width: 768px) 50vw, 33vw" 
-                src={images[0]} 
-                alt={`${title} 1`} 
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-              />
+              {/\.(mp4|webm|ogg)$/i.test(images[0]) ? (
+                <video src={images[0]} autoPlay loop muted playsInline className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out absolute inset-0" />
+              ) : (
+                <Image fill sizes="(max-width: 768px) 50vw, 33vw" src={images[0]} alt={`${title} 1`} className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+              )}
             </div>
 
             {/* Second Feature Image (Top Right on Mobile, Right Half if only 2 images) */}
             <div className={`col-span-1 md:col-span-2 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5 ${images.length === 2 ? "row-span-2" : "row-span-1"}`}>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-              <Image 
-                fill 
-                sizes="(max-width: 768px) 50vw, 33vw" 
-                src={images[1]} 
-                alt={`${title} 2`} 
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-              />
+              {/\.(mp4|webm|ogg)$/i.test(images[1]) ? (
+                <video src={images[1]} autoPlay loop muted playsInline className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out absolute inset-0" />
+              ) : (
+                <Image fill sizes="(max-width: 768px) 50vw, 33vw" src={images[1]} alt={`${title} 2`} className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+              )}
             </div>
 
             {/* Bottom Right Small Image 1 (Only rendered if more than 2 images exist) */}
             {images.length > 2 && images[2] && (
               <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-                <Image 
-                  fill 
-                  sizes="(max-width: 768px) 50vw, 15vw" 
-                  src={images[2]} 
-                  alt={`${title} 3`} 
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-                />
+                {/\.(mp4|webm|ogg)$/i.test(images[2]) ? (
+                  <video src={images[2]} autoPlay loop muted playsInline className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out absolute inset-0" />
+                ) : (
+                  <Image fill sizes="(max-width: 768px) 50vw, 15vw" src={images[2]} alt={`${title} 3`} className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                )}
               </div>
             )}
 
@@ -141,13 +137,11 @@ export default function ServiceCard({
             {images.length > 2 && images[3] && (
               <div className="col-span-1 row-span-1 relative w-full h-full overflow-hidden rounded-[10px] md:rounded-[20px] group shadow-md border border-black/5">
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-                <Image 
-                  fill 
-                  sizes="(max-width: 768px) 50vw, 15vw" 
-                  src={images[3]} 
-                  alt={`${title} 4`} 
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-                />
+                {/\.(mp4|webm|ogg)$/i.test(images[3]) ? (
+                  <video src={images[3]} autoPlay loop muted playsInline className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out absolute inset-0" />
+                ) : (
+                  <Image fill sizes="(max-width: 768px) 50vw, 15vw" src={images[3]} alt={`${title} 4`} className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                )}
               </div>
             )}
 

@@ -23,7 +23,7 @@ const works = [
     desc1:
       "Large-scale architectural murals fusing industrial spray paint, heavy acrylic overlays, and custom stencils on concrete walls — redefining public space as tactile material art.",
     desc2:
-      "Commissioned across Tamil Nadu, each mural is adaptive to its environment and engineered to weather time and exposure.",
+      "Commissioned across INDIA, each mural is adaptive to its environment and engineered to weather time and exposure.",
   }
 ];
 

@@ -6,59 +6,64 @@ import "../gallery.css";
 
 const GALLERY_ITEMS: GalleryItem[] = [
   {
-    src: "/images/gallery/image_cc2640.jpg",
+    src: "/images/gallery/gallery_1.mp4",
     title: "Mural Artistry",
-    subtitle: "Street Art",
+    subtitle: "Wall Art",
     description: "Vibrant compositions transforming environments",
   },
-  // Keep your existing items here...
   {
-    src: "/images/gallery/image01.jpg",
+    src: "/images/gallery/gallery_2.jpg",
     title: "Graphite Study",
-    subtitle: "Sketch",
+    subtitle: "Pencil",
     description: "Perfecting the craft of visual storytelling",
   },
   {
-    src: "/images/gallery/image02.jpg",
+    src: "/images/gallery/gallery_3.jpg",
     title: "Mural Execution",
     subtitle: "Street Art",
     description: "Unique artworks delivered across commercial spaces",
   },
   {
-    src: "/images/gallery/image05.jpg",
+    src: "/images/gallery/gallery_4.mp4",
     title: "Charcoal Depth",
     subtitle: "Drawing",
     description: "Exploring deep contrasts and fine details",
   },
   {
-    src: "/images/gallery/image06.jpg",
+    src: "/images/gallery/gallery_5.jpg",
     title: "Vivid Strokes",
     subtitle: "Acrylic",
     description: "Bold colours brought to life on canvas",
   },
   {
-    src: "/images/gallery/image09.jpg",
+    src: "/images/gallery/gallery_6.jpg",
     title: "Oil Impression",
     subtitle: "Oil Painting",
     description: "Rich textures and luminous tones",
   },
   {
-    src: "/images/gallery/image11.jpg",
+    src: "/images/gallery/gallery_7.mp4",
     title: "Subtle Form",
     subtitle: "Pencil Art",
     description: "Delicate lines defining intricate shapes",
   },
   {
-    src: "/images/gallery/image12.jpg",
+    src: "/images/gallery/gallery_8.jpg",
     title: "Urban Canvas",
     subtitle: "Wall Art",
     description: "Transforming blank walls into living art",
   },
   {
-    src: "/images/gallery/image13.jpg",
+    src: "/images/gallery/gallery_9.mp4",
     title: "Portrait Study",
     subtitle: "Sketch",
     description: "Capturing emotion through careful observation",
+  },
+  {
+    src: "/images/gallery/gallery_10.mp4",
+    title: "Creative Process",
+    subtitle: "Behind the Scenes",
+    description: "A cinematic look at the artistic execution",
   },
 ];
 
