@@ -75,7 +75,7 @@ export default function ServiceCard({
           
           {/* Left Content Area */}
           <div className="w-full md:w-[35%] flex flex-col justify-between">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-start">
               <h2 className={`text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-[1.1] font-black tracking-tighter text-neutral-900 ${spaceGrotesk.className}`}>
                 {title}
               </h2>
@@ -83,7 +83,14 @@ export default function ServiceCard({
                 {description}
               </p>
             </div>
-            <div className="mt-6 md:mt-0">
+            <div className="mt-6 md:mt-0 flex flex-col items-start gap-4">
+              {title === "Wall Art" && (
+                <div className={`px-4 py-1.5 rounded-full bg-gradient-to-r from-neutral-900 to-black text-[#d4af37] text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase border border-[#d4af37]/40 shadow-[0_0_15px_rgba(212,175,55,0.25)] flex items-center gap-2 backdrop-blur-md ${shareTechMono.className}`}>
+                  <svg className="w-3.5 h-3.5 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  Specialist
+                </div>
+              )}
+              <div className="flex flex-col sm:flex-row gap-4 w-full">
               <a
                 href="#contact"
                 onClick={() => {
@@ -91,10 +98,19 @@ export default function ServiceCard({
                     new CustomEvent("select-art-type", { detail: title }),
                   );
                 }}
-                className={`inline-block px-6 py-3 md:px-8 md:py-4 rounded-full border border-black bg-black text-[10px] md:text-sm uppercase text-white tracking-[0.2em] font-bold hover:bg-neutral-800 hover:scale-105 transition-all duration-300 ${shareTechMono.className}`}
+                className={`inline-block px-6 py-3 md:px-8 md:py-4 rounded-full border border-black bg-black text-[10px] md:text-sm uppercase text-white tracking-[0.2em] font-bold hover:bg-neutral-800 hover:scale-105 transition-all duration-300 text-center ${shareTechMono.className}`}
               >
                 Book Now
               </a>
+              {title === "Wall Art" && (
+                <a
+                  href="/wall-art"
+                  className={`inline-block px-6 py-3 md:px-8 md:py-4 rounded-full bg-[#d4af37] border-2 border-black text-black text-[10px] md:text-sm uppercase tracking-[0.2em] font-black hover:bg-[#b8860b] hover:scale-105 shadow-[0_4px_15px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.7)] transition-all duration-300 text-center ${shareTechMono.className}`}
+                >
+                  View More Wall Arts
+                </a>
+              )}
+              </div>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
+import CanvasPaintTrail from "./components/ui/CanvasPaintTrail";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -109,6 +110,7 @@ export default function RootLayout({
         className={`${spaceGrotesk.className} min-h-screen flex flex-col antialiased bg-black text-white selection:bg-[#d4af37] selection:text-black`}
       >
         <SmoothScrollProvider />
+        <CanvasPaintTrail />
         <Header />
 
         <main className="flex-1 flex flex-col w-full">

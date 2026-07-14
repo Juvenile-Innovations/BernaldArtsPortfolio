@@ -39,19 +39,11 @@ const servicesData = [
     bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {
-    title: "Oil Painting",
+    title: "Live Painting",
     description:
-      "Traditional slow-drying oil paint systems, leveraging multi-layered translucent glazes and rich oil mediums to achieve archival depth and complex physical light scattering.",
-    images: ["/images/services/oil_painting/1.jpg", "/images/services/oil_painting/2.jpg", "/images/services/oil_painting/3.jpg", "/images/services/oil_painting/4.jpg"],
-    color: "#ea580c", // Rich Orange
-    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
-  },
-  {
-    title: "Watercolor",
-    description:
-      "Translucent wash fluid dynamics executed on 100% cotton press substrate, controlling organic pigment bleeds and granulation for delicate landscape atmospheric depth.",
-    images: ["/images/services/watercolor/1.png", "/images/services/watercolor/2.png", "/images/services/watercolor/3.png", "/images/services/watercolor/4.png"],
-    color: "#0ea5e9", // Sky Blue
+      "Dynamic, real-time artistic performance capturing the raw energy of live events. Engaging audiences through rapid structural composition and spontaneous chromatic expressions.",
+    images: ["/images/services/live_painting/1.jpg", "/images/services/live_painting/2.jpg", "/images/services/live_painting/3.jpg", "/images/services/live_painting/4.jpg"],
+    color: "#eab308", // Golden Yellow
     bgImage: "", // ADD SPECIFIC BG IMAGE HERE
   },
   {

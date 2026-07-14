@@ -16,6 +16,11 @@ export default function Header() {
     if (isActive) setIsActive(false)
   }, [pathname])
 
+  // Hide the global navigation burger on the dedicated Wall Art page
+  if (pathname === '/wall-art') {
+    return null;
+  }
+
   return (
     <>
 
