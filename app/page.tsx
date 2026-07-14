@@ -5,12 +5,10 @@ import Achievements from "./sections/Achievements";
 import Gallery from "./sections/Gallery";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
-import { SmoothCursor } from "./components/smooth-cursor";
 
 export default function Home() {
   return (
     <main className="w-full bg-black flex flex-col m-0 p-0">
-      <SmoothCursor />
 
       {/*
        * HeroScrollSequence owns the GSAP pin+scrub timeline.

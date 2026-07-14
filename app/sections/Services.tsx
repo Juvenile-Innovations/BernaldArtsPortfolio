@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { spaceGrotesk, elsie } from "@/app/lib/fonts";
 import { useScroll } from "framer-motion";
 import ServiceCard from "./services_components/ServiceCard";
-import { SilkWaveBg } from "@/app/components/ui/silk-wave-bg";
 
 const servicesData = [
   {
@@ -103,12 +102,7 @@ export default function Services() {
       data-scroll-section
       className="relative w-full bg-neutral-950 text-white pb-32 border-t border-neutral-900"
     >
-      {/* Dynamic Silk Wave Background */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
-        <div className="sticky top-0 w-full h-screen">
-          <SilkWaveBg />
-        </div>
-      </div>
+
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-12 pt-24 md:pt-36 pb-12">
         {/* Section Header */}

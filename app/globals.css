@@ -68,7 +68,6 @@ body {
   }
 
   * {
-    cursor: none;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -260,11 +259,13 @@ body {
   display: inline-block;
 }
 
-/* FORCE HIDE ORIGINAL CURSOR GLOBALLY AT ALL TIMES */
+/* 
+ * CUSTOM PAINTBRUSH CURSOR
+ */
 html,
 body,
 *,
 *::before,
 *::after {
-  cursor: none !important;
+  cursor: url('/images/assets/paintBrushCursor_48.png') 0 0, auto !important;
 }

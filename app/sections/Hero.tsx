@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { spaceGrotesk } from "@/app/lib/fonts";
-
+import { IconArrowDown } from "@tabler/icons-react";
 import { FallingPetals } from "@/app/components/ui/FallingPetals";
 
 const protestGuerrilla = Protest_Guerrilla({
@@ -60,6 +60,12 @@ export default function Hero() {
           scrub: isMobile ? 0.5 : 1.2, // Faster, tighter scrub on mobile
           start: "top top",
           end: isMobile ? "+=500px" : "+=800px", // Less scroll distance required on mobile
+          snap: {
+            snapTo: [0, 1], // Snap only to beginning (0) or end (1) of the animation
+            duration: { min: 0.2, max: 0.5 }, // Snappy but smooth
+            delay: 0.05, // Wait 50ms after scroll stops before snapping
+            ease: "power2.inOut",
+          },
         },
       });
 
@@ -146,11 +152,13 @@ export default function Hero() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-10"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover z-10 bg-black"
         >
-          <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero_compressed.webm" type="video/webm" />
+          <source src="/videos/hero_compressed.mp4" type="video/mp4" />
         </video>
-        
+
         {/* Flaticon Logo inside the ball, initially hidden */}
         <img
           ref={logoRef}
@@ -166,9 +174,13 @@ export default function Hero() {
         className="absolute z-10 flex flex-col items-center justify-center pointer-events-auto opacity-0"
         style={{ top: "calc(50% + 120px)" }}
       >
-        <p className="text-white text-xl md:text-2xl font-black uppercase tracking-[0.3em] mb-3">
+        <p className="text-white text-xl md:text-2xl font-black uppercase tracking-[0.3em]">
           BERNALD ARTS
         </p>
+        <div className="flex flex-col items-center justify-center gap-2 mt-4 opacity-50">
+          <span className="text-white text-[9px] uppercase tracking-[0.3em] font-light">Scroll Down</span>
+          <IconArrowDown size={16} stroke={2} className="text-white animate-bounce" />
+        </div>
       </div>
 
       {/* Ambient glows */}
@@ -183,9 +195,25 @@ export default function Hero() {
 
       {/* All visible content — fades out in sync with collapse */}
       <div ref={contentRef} className="absolute inset-0 z-10 flex flex-col">
-        {/* Centre — rotating role + CTA */}
+        {/* Top-Centered Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute top-[12vh] md:top-[15vh] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center justify-center gap-2"
+        >
+          <span className="text-white/80 text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold">Scroll to ART</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <IconArrowDown size={28} stroke={3} className="text-white drop-shadow-lg" />
+          </motion.div>
+        </motion.div>
+
+        {/* Centre — rotating role */}
         <div className="absolute inset-0 z-30 flex flex-col items-center justify-center px-4 md:px-6">
-          <div className="h-[40px] md:h-[70px] flex items-center justify-center mb-8 md:mb-12">
+          <div className="h-[40px] md:h-[70px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentRole}
@@ -199,18 +227,6 @@ export default function Hero() {
               </motion.p>
             </AnimatePresence>
           </div>
-
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center px-6 md:px-12 py-3 md:py-4 text-white text-xs md:text-base font-semibold uppercase tracking-[0.1em] md:tracking-[0.15em] rounded-full backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg"
-          >
-            Book an ART
-          </motion.a>
         </div>
 
         {/* Large heading — bottom edge */}
