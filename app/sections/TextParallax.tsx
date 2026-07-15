@@ -15,21 +15,21 @@ export default function TextParallax() {
     <section className="relative overflow-hidden bg-neutral-950 text-white border-t border-neutral-900 py-16 md:py-24 z-10">
       <div ref={container} className="flex flex-col gap-6 md:gap-10">
         <Slide
-          src="/images/gallery/image01.jpg"
+          src="/images/tape/5.png"
           direction="left"
           left="-40%"
           progress={scrollYProgress}
           text="BERNALD ARTS"
         />
         <Slide
-          src="/images/gallery/image02.jpg"
+          src="/images/tape/7.png"
           direction="right"
           left="-25%"
           progress={scrollYProgress}
           text="BERNALD ARTS"
         />
         <Slide
-          src="/images/gallery/image04.jpg"
+          src="/images/tape/6.png"
           direction="left"
           left="-75%"
           progress={scrollYProgress}

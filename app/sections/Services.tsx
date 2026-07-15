@@ -12,23 +12,23 @@ const servicesData = [
       "Architectural-scale mural integration synthesized with environment-specific spatial planning and structural surface mapping. Executed with high-viscosity aerosol polymers to transform massive vertical surfaces.",
     images: ["/images/services/wall_art/wall_art_4.jpg", "/images/services/wall_art/wall_art_1.jpg", "/images/services/wall_art/wall_art_3.jpg", "/images/services/wall_art/wall_art_2.jpg"],
     color: "#06b6d4", // Vibrant Cyan
-    bgImage: "/images/services/wall_art/wall_art_1.jpg", 
+    bgImage: "/images/services/wall_art/wall_art_1.jpg",
   },
   {
     title: "Pencil Art",
     description:
       "Hyper-realistic monochromatic rendering protocols using fine-grain archival graphite, exploring extreme light values, microscopic skin texture details, and absolute shadow depth.",
-    images: ["/images/services/pencil_art/pencil_art_1.jpg", "/images/services/pencil_art/pencil_art_2.png", "/images/services/pencil_art/pencil_art_4.png", "/images/services/pencil_art/pencil_art_5.png"],
+    images: ["/images/services/pencil_art/1.png", "/images/services/pencil_art/2.png", "/images/services/pencil_art/3.png", "/images/services/pencil_art/4.png"],
     color: "#64748b", // Slate Gray
-    bgImage: "/images/services/pencil_art/pencil_art_2.png", // ADD SPECIFIC BG IMAGE HERE
+    bgImage: "/images/services/pencil_art/2.png", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Colour Pencil",
     description:
       "Wax-core pigment synthesis overlaying multiple translucent layers to create vibrant, photorealistic depth and high-contrast saturation on archival heavy paper.",
-    images: ["/images/services/colour_pencil/1.png", "/images/services/colour_pencil/2.png", "/images/services/colour_pencil/3.jpg", "/images/services/colour_pencil/4.png"],
+    images: ["/images/services/colour_pencil/cp_2.png", "/images/services/colour_pencil/cp_3.png", "/images/services/colour_pencil/cp_1.png", "/images/services/colour_pencil/cp_4.png"],
     color: "#a855f7", // Vibrant Purple
-    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
+    bgImage: "/images/services/colour_pencil/cp_2.png", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Acrylic Art",
