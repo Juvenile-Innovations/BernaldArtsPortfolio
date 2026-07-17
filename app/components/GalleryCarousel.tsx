@@ -170,6 +170,15 @@ export default function GalleryCarousel({
           if (i === nextIndex) dot.setAttribute("data-active", "");
         }
       );
+      
+      // Play only the current video, pause the rest
+      el.querySelectorAll<HTMLVideoElement>(".slide video").forEach((video, i) => {
+        if (i === nextIndex) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
     },
     [total]
   );
@@ -250,20 +259,9 @@ export default function GalleryCarousel({
           <div
             key={`bg-${i}`}
             className="slide__bg"
-            style={!isVideo ? { "--bg": `url(${item.src})` } as React.CSSProperties : {}}
+            style={!isVideo ? { "--bg": `url(${item.src})` } as React.CSSProperties : { background: "#000" }}
             {...getAttr(i)}
-          >
-            {isVideo && (
-              <video
-                src={item.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            )}
-          </div>
+          />
         );
       })}
 
@@ -300,7 +298,6 @@ export default function GalleryCarousel({
                         <video
                           className="slide--image"
                           src={item.src}
-                          autoPlay
                           loop
                           muted
                           playsInline

@@ -58,7 +58,7 @@ export default function ServiceCard({
             src={bgImage || images[0]}
             alt="Card background blur"
             fill
-            className="object-cover opacity-80 blur-[6px] scale-110"
+            className="object-cover opacity-60"
           />
           
           {/* Extremely light transparent wash overlay */}

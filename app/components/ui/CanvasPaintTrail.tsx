@@ -11,6 +11,9 @@ export default function CanvasPaintTrail() {
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
+    // Disable drawing trail on mobile devices to massively improve scroll performance
+    if (window.innerWidth <= 768) return;
+
     let width = window.innerWidth;
     let height = window.innerHeight;
     canvas.width = width;
