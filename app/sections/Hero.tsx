@@ -44,6 +44,21 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  // Play video only when loader is finished
+  useEffect(() => {
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(console.error);
+      }
+    };
+    
+    window.addEventListener("globalLoaderFinished", playVideo);
+    
+    return () => {
+      window.removeEventListener("globalLoaderFinished", playVideo);
+    };
+  }, []);
+
   // Scroll-driven collapse:
   // Hero is pinned → video box shrinks into a white ball
   // Video fades out, Logo fades in, Text beneath fades in
@@ -148,7 +163,6 @@ export default function Hero() {
       >
         <video
           ref={videoRef}
-          autoPlay
           muted
           loop
           playsInline

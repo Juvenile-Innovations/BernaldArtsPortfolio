@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/header";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
 import CanvasPaintTrail from "./components/ui/CanvasPaintTrail";
+import GlobalLoader from "./components/GlobalLoader";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -109,6 +110,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.className} min-h-screen flex flex-col antialiased bg-black text-white selection:bg-[#d4af37] selection:text-black`}
       >
+        <GlobalLoader />
         <SmoothScrollProvider />
         <CanvasPaintTrail />
         <Header />

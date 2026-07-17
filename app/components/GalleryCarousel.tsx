@@ -242,7 +242,7 @@ export default function GalleryCarousel({
 
   /* ── Render ── */
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={containerRef} style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
       {/* Blurred background layers */}
       {items.map((item, i) => {
         const isVideo = /\.(mp4|webm|ogg)$/i.test(item.src);

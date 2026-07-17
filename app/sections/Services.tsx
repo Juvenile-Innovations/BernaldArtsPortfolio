@@ -42,9 +42,9 @@ const servicesData = [
     title: "Live Painting",
     description:
       "Dynamic, real-time artistic performance capturing the raw energy of live events. Engaging audiences through rapid structural composition and spontaneous chromatic expressions.",
-    images: ["/images/services/live_painting/1.jpg", "/images/services/live_painting/2.jpg", "/images/services/live_painting/3.jpg", "/images/services/live_painting/4.jpg"],
+    images: ["/images/services/live_art/1.png", "/images/services/live_art/2.png"],
     color: "#eab308", // Golden Yellow
-    bgImage: "", // ADD SPECIFIC BG IMAGE HERE
+    bgImage: "/images/services/live_art/1.png", // ADD SPECIFIC BG IMAGE HERE
   },
   {
     title: "Blood Art",
@@ -74,9 +74,9 @@ const servicesData = [
     title: "Digital Art",
     description:
       "High-fidelity digital illustration and conceptual rendering using advanced stylus technologies, specializing in cinematic lighting, complex matte painting, and ultra-detailed character concepts.",
-    images: ["/images/services/digital_art/digital_art_1.JPG", "/images/services/digital_art/digital_art_2.JPG", "/images/services/digital_art/digital_art_3.JPG", "/images/services/digital_art/digital_art_4.JPG"],
+    images: ["/images/services/digital_art/1.jpg", "/images/services/digital_art/2.jpg", "/images/services/digital_art/3.jpg", "/images/services/digital_art/4.jpg"],
     color: "#3b82f6", // Vibrant Blue
-    bgImage: "/images/services/digital_art/digital_art_1.JPG", // ADD SPECIFIC BG IMAGE HERE
+    bgImage: "/images/services/digital_art/1.jpg", // ADD SPECIFIC BG IMAGE HERE
   },
 ];
 

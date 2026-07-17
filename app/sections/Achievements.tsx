@@ -10,7 +10,7 @@ export default function Achievements() {
     <section id="achievement" className="w-full bg-black">
       {/* 1. Awards */}
       <ParallaxSection
-        src="/images/gallery/image17.jpg"
+        src="/images/awards_bg.png"
         title="Prestigious Art Awards"
         description="Recognized with 05+ national awards for mixed media art, traditional oil, and signature modern murals across galleries in India."
       />

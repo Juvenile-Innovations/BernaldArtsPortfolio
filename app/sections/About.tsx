@@ -19,7 +19,7 @@ const phrases = [
 const works = [
   {
     title: "Wall Murals",
-    src: "/images/about/about_1.png",
+    src: "/images/about/about.png",
     desc1:
       "Large-scale architectural murals fusing industrial spray paint, heavy acrylic overlays, and custom stencils on concrete walls — redefining public space as tactile material art.",
     desc2:
@@ -188,6 +188,7 @@ export default function About() {
                 <Image
                   src={works[selectedWork].src}
                   fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
                   alt={works[selectedWork].title}
                   priority
                   className="object-cover rounded-lg md:rounded-none"
@@ -201,7 +202,7 @@ export default function About() {
             {/* Column 1 — primary description */}
             <div className="flex flex-col w-full sm:w-[45%] md:w-[45%] drop-shadow-md">
               <p className="m-0 text-[4vw] sm:text-[2.5vw] md:text-[1.6vw] leading-relaxed">{works[selectedWork].desc1}</p>
-              
+
               <style>{`
                 @keyframes signatureGlow {
                   0% { 

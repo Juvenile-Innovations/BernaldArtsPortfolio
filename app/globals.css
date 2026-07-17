@@ -267,7 +267,5 @@ body,
 *,
 *::before,
 *::after {
-  cursor: url('/images/assets/paintBrushCursor_48.png') 0 0, auto !important;
+  cursor: url('/images/assets/paintBrushCursor.png') 0 0, auto !important;
 }
-
-
